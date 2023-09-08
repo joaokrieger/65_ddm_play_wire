@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:title="Rank"
+        android:icon="@drawable/ic_baseline_stars"
+        android:id="@+id/rank"/>
+    <item android:title="Feed"
+        android:icon="@drawable/ic_baseline_rate_review"
+        android:id="@+id/feed"/>
+    <item android:title="Profile"
+        android:icon="@drawable/ic_baseline_person"
+        android:id="@+id/profile"/>
+</menu>

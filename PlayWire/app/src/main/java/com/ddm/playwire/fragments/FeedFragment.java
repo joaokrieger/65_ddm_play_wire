@@ -1,14 +1,15 @@
-package com.ddm.playwire;
+package com.ddm.playwire.fragments;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ddm.playwire.R;
+import com.ddm.playwire.activities.MenuActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FeedFragment extends Fragment {

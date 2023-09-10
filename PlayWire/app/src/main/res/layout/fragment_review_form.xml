@@ -8,7 +8,7 @@
     android:paddingLeft="20dp"
     android:paddingTop="50dp"
     android:paddingRight="20dp"
-    tools:context=".ReviewFormFragment">
+    tools:context=".fragments.ReviewFormFragment">
 
     <TextView
         android:id="@+id/tvFormReview"
@@ -52,6 +52,19 @@
         android:paddingBottom="5dp"
         android:textColor="#FFFFFF"
         android:textColorHint="#5EFFFFFF" />
+
+    <Spinner
+        android:id="@+id/spGameReviewScore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edittext"
+        android:minHeight="48dp"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:paddingRight="5dp"
+        android:paddingBottom="5dp"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btnRegisterReview"

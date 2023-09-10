@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Play Wire</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="game_review_score">
+        <item>Muito Bom</item>
+        <item>Bom</item>
+        <item>Mediano</item>
+        <item>Ruim</item>
+        <item>Muito Ruim</item>
+    </string-array>
+
 </resources>

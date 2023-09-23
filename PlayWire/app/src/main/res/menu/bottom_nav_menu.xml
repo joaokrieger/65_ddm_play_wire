@@ -7,7 +7,7 @@
     <item android:title="Feed"
         android:icon="@drawable/ic_baseline_rate_review"
         android:id="@+id/feed"/>
-    <item android:title="Profile"
+    <item android:title="Perfil"
         android:icon="@drawable/ic_baseline_person"
         android:id="@+id/profile"/>
 </menu>

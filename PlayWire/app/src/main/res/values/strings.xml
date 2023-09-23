@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Play Wire</string>
     <string-array name="game_review_score">
-        <item>Muito Bom</item>
+        <item>Excelente</item>
         <item>Bom</item>
-        <item>Mediano</item>
-        <item>Ruim</item>
-        <item>Muito Ruim</item>
+        <item>Regular</item>
+        <item>Insatisfatório</item>
+        <item>Muito Insatisfatório</item>
     </string-array>
 
 </resources>

@@ -20,11 +20,11 @@
         android:textStyle="bold" />
 
     <EditText
-        android:id="@+id/etGame"
+        android:id="@+id/etGameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:hint="Nome do Jogo"
         android:inputType="textPersonName"
@@ -37,11 +37,11 @@
         android:textColorHint="#5EFFFFFF" />
 
     <EditText
-        android:id="@+id/etReview"
+        android:id="@+id/etReviewDescription"
         android:layout_width="match_parent"
         android:layout_height="295dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:ems="10"
         android:gravity="top|left"
         android:hint="Escreva sua análise aqui..."
@@ -54,11 +54,11 @@
         android:textColorHint="#5EFFFFFF" />
 
     <Spinner
-        android:id="@+id/spGameReviewScore"
+        android:id="@+id/spFeedback"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:background="@drawable/rounded_edittext"
+        android:background="@drawable/rounded_edit_text"
         android:minHeight="48dp"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"

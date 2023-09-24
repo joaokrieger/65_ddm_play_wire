@@ -7,12 +7,25 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.ddm.playwire.R;
 import com.ddm.playwire.activities.MenuActivity;
+import com.ddm.playwire.adapter.ReviewAdapter;
+import com.ddm.playwire.data.ReviewDatabaseHelper;
+import com.ddm.playwire.models.Review;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 public class FeedFragment extends Fragment {
+
+    private FloatingActionButton fabAddReview;
+    private ReviewDatabaseHelper reviewDatabaseHelper;
+    private View rootView;
+    private ListView feed;
 
     public static FeedFragment newInstance() {
         FeedFragment fragment = new FeedFragment();
@@ -27,8 +40,8 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_feed, container, false);
-        FloatingActionButton fabAddReview = rootView.findViewById(R.id.fabAddReview);
+        rootView = inflater.inflate(R.layout.fragment_feed, container, false);
+        fabAddReview = rootView.findViewById(R.id.fabAddReview);
 
         fabAddReview.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +51,18 @@ public class FeedFragment extends Fragment {
             }
         });
 
+        displayData();
+
         return rootView;
+    }
+
+    public void displayData(){
+        feed = rootView.findViewById(R.id.lvFeed);
+        reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
+        List<Review> reviews = reviewDatabaseHelper.listReview();
+
+        ReviewAdapter reviewAdapter = new ReviewAdapter(getContext(), reviews);
+
+        feed.setAdapter(reviewAdapter);
     }
 }

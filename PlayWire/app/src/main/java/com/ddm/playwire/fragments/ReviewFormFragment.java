@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.ddm.playwire.R;
+import com.ddm.playwire.activities.MenuActivity;
 import com.ddm.playwire.data.ReviewDatabaseHelper;
 
 /**
@@ -56,11 +57,14 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
 
         btnRegisterReview.setOnClickListener(view -> {
             ReviewDatabaseHelper reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
-            reviewDatabaseHelper.addReview(
+            reviewDatabaseHelper.insertReview(
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),
                     feedback,
                     1);
+
+            MenuActivity activity = (MenuActivity) getActivity();
+            activity.replaceFragment(new FeedFragment());
         });
 
         return rootView;

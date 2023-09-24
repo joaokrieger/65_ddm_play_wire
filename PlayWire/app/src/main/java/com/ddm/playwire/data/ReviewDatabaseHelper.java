@@ -2,10 +2,17 @@ package com.ddm.playwire.data;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.ddm.playwire.models.Review;
+import com.ddm.playwire.models.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewDatabaseHelper extends SQLiteOpenHelper {
 
@@ -43,7 +50,7 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void addReview(String gameTitle, String reviewDescription, String feedback, int userId){
+    public void insertReview(String gameTitle, String reviewDescription, String feedback, int userId){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -54,5 +61,29 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(context, result);
+    }
+
+    public List<Review> listReview(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        List<Review> reviews = new ArrayList<Review>();
+
+        if(sqLiteDatabase != null){
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while(cursor.moveToNext()){
+
+                User user = new User();
+                int id = Integer.parseInt(cursor.getString(0));
+                String gameTitle = cursor.getString(1);
+                String reviewDescription = cursor.getString(2);
+                String feedback = cursor.getString(3);
+
+                Review review = new Review(id, gameTitle, reviewDescription, feedback, user);
+                reviews.add(review);
+            }
+        }
+
+        return reviews;
     }
 }

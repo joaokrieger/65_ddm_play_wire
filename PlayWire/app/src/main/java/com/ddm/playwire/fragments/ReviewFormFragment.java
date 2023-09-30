@@ -18,11 +18,6 @@ import com.ddm.playwire.R;
 import com.ddm.playwire.activities.MenuActivity;
 import com.ddm.playwire.data.ReviewDatabaseHelper;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ReviewFormFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     EditText etGameTitle, etReviewDescription;
@@ -57,6 +52,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
 
         btnRegisterReview.setOnClickListener(view -> {
             ReviewDatabaseHelper reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
+
             reviewDatabaseHelper.insertReview(
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),

@@ -19,26 +19,31 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <ListView
-        android:id="@+id/lvFeed"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="616dp"
-        android:layout_marginTop="30dp"
-        android:layout_weight="1"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" />
+        android:layout_height="match_parent">
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAddReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#FF007055"
-        android:clickable="true"
-        android:contentDescription="TODO"
-        android:focusable="true"
-        android:src="@drawable/ic_baseline_add"
-        tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabAddReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:backgroundTint="#FF007055"
+            android:clickable="true"
+            android:contentDescription="TODO"
+            android:focusable="true"
+            android:src="@drawable/ic_baseline_add"
+            tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
+
+        <ListView
+            android:id="@+id/lvFeed"
+            android:layout_width="match_parent"
+            android:layout_height="606dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:paddingBottom="30dp" />
+    </FrameLayout>
+
 </LinearLayout>

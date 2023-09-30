@@ -64,5 +64,13 @@ public class FeedFragment extends Fragment {
         ReviewAdapter reviewAdapter = new ReviewAdapter(getContext(), reviews);
 
         feed.setAdapter(reviewAdapter);
+
+        feed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                MenuActivity activity = (MenuActivity) getActivity();
+                activity.replaceFragment(new ReviewFormFragment());
+            }
+        });
     }
 }

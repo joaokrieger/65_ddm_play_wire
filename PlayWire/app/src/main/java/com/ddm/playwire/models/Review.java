@@ -2,21 +2,33 @@ package com.ddm.playwire.models;
 
 public class Review {
 
-    private int id;
+    private int reviewId;
     private String gameTitle;
     private String reviewDescription;
     private String feedback;
     private User user;
 
-    public Review(int id, String gameTitle, String reviewDescription, String feedback, User user) {
+    public Review(int reviewId, String gameTitle, String reviewDescription, String feedback, User user) {
+        this.reviewId = reviewId;
         this.gameTitle = gameTitle;
         this.reviewDescription = reviewDescription;
         this.feedback = feedback;
         this.user = user;
     }
 
-    public int getId() {
-        return id;
+    public Review(String gameTitle, String reviewDescription, String feedback, User user) {
+        this.gameTitle = gameTitle;
+        this.reviewDescription = reviewDescription;
+        this.feedback = feedback;
+        this.user = user;
+    }
+
+    public int getReviewId() {
+        return reviewId;
+    }
+
+    public void setReviewId(int reviewId) {
+        this.reviewId = reviewId;
     }
 
     public String getGameTitle() {

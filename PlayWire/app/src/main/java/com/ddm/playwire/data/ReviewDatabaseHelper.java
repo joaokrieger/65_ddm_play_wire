@@ -20,7 +20,7 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "review";
 
-    private static final String COLUMN_ID = "_id";
+    private static final String COLUMN_ID = "id";
     private static final String COLUMN_GAME_TITLE = "game_title";
     private static final String COLUMN_REVIEW_DESCRIPTION = "review_description";
     private static final String COLUMN_FEEDBACK = "feedback";
@@ -73,7 +73,7 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             while(cursor.moveToNext()){
 
-                User user = new User();
+                User user = new User(1, "JEK", "123");
                 int id = Integer.parseInt(cursor.getString(0));
                 String gameTitle = cursor.getString(1);
                 String reviewDescription = cursor.getString(2);

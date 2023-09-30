@@ -14,6 +14,14 @@
         android:theme="@style/Theme.PlayWire"
         tools:targetApi="31">
         <activity
+            android:name=".activities.UserFormActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.LoginActivity"/>
+        <activity
+            android:name=".activities.MenuActivity"
+            android:exported="false"
+            android:parentActivityName=".activities.MenuActivity"/>
+        <activity
             android:name=".activities.LoginActivity"
             android:exported="true">
             <intent-filter>

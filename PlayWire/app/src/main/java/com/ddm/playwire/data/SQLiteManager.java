@@ -6,7 +6,7 @@ import android.widget.Toast;
 public class SQLiteManager {
 
     public static final String DATABASE_NAME = "PlayWire.db";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 
     public static void checkExecSql(Context context, long result){
         if(result == -1){

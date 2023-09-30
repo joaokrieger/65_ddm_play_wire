@@ -34,7 +34,7 @@ public class ReviewAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int position) {
-        return reviews.get(position).getId();
+        return reviews.get(position).getReviewId();
     }
 
     @Override

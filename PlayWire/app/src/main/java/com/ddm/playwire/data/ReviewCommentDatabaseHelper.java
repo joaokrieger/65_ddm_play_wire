@@ -6,17 +6,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class UserDatabaseHelper extends SQLiteOpenHelper {
+public class ReviewCommentDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
-
-    private static final String TABLE_NAME = "user";
+    private static final String TABLE_NAME = "review_comment";
 
     private static final String COLUMN_ID = "_id";
-    private static final String COLUMN_USERNAME = "username";
-    private static final String COLUMN_PASSWORD = "password";
+    private static final String COLUMN_REVIEW = "id_review";
+    private static final String COLUMN_USER = "id_user";
+    private static final String COLUMN_COMMENT = "comment";
 
-    public UserDatabaseHelper(@Nullable Context context) {
+    public ReviewCommentDatabaseHelper(@Nullable Context context) {
         super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
         this.context = context;
     }
@@ -25,8 +25,11 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String query = "CREATE TABLE " + TABLE_NAME + " ("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_USERNAME + " TEXT, "
-                + COLUMN_PASSWORD + " TEXT)";
+                + COLUMN_REVIEW + " INTEGER, "
+                + COLUMN_USER + " INTEGER, "
+                + COLUMN_COMMENT + " TEXT, "
+                + "FOREIGN KEY (" + COLUMN_REVIEW + ") REFERENCES review(_id), "
+                + "FOREIGN KEY (" + COLUMN_USER + ") REFERENCES user(_id))";
 
         sqLiteDatabase.execSQL(query);
     }

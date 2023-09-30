@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import com.ddm.playwire.R;
 import com.ddm.playwire.activities.MenuActivity;
 import com.ddm.playwire.data.ReviewDatabaseHelper;
+import com.ddm.playwire.models.Review;
+import com.ddm.playwire.models.User;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -53,11 +55,11 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         btnRegisterReview.setOnClickListener(view -> {
             ReviewDatabaseHelper reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
 
-            reviewDatabaseHelper.insertReview(
+            reviewDatabaseHelper.insertReview(new Review(
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),
                     feedback,
-                    1);
+                    new User(1,"jek","123")));
 
             MenuActivity activity = (MenuActivity) getActivity();
             activity.replaceFragment(new FeedFragment());

@@ -20,7 +20,7 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME = "review";
 
-    private static final String COLUMN_ID = "id";
+    private static final String COLUMN_ID = "_id";
     private static final String COLUMN_GAME_TITLE = "game_title";
     private static final String COLUMN_REVIEW_DESCRIPTION = "review_description";
     private static final String COLUMN_FEEDBACK = "feedback";
@@ -50,14 +50,14 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertReview(String gameTitle, String reviewDescription, String feedback, int userId){
+    public void insertReview(Review review){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(COLUMN_GAME_TITLE, gameTitle);
-        contentValues.put(COLUMN_REVIEW_DESCRIPTION, reviewDescription);
-        contentValues.put(COLUMN_FEEDBACK, feedback);
-        contentValues.put(COLUMN_USER_ID, userId);
+        contentValues.put(COLUMN_GAME_TITLE, review.getGameTitle());
+        contentValues.put(COLUMN_REVIEW_DESCRIPTION, review.getReviewDescription());
+        contentValues.put(COLUMN_FEEDBACK, review.getFeedback());
+        contentValues.put(COLUMN_USER_ID, review.getUser().getUserId());
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(context, result);

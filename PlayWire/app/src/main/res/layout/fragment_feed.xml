@@ -4,16 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E2127"
-    tools:context=".fragments.FeedFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    tools:context=".fragments.FeedFragment">
 
     <TextView
         android:id="@+id/tvFeed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="20dp"
         android:paddingTop="30dp"
-        android:paddingBottom="30dp"
         android:text="Feed"
         android:textColor="#B7B7B7"
         android:textSize="24sp"

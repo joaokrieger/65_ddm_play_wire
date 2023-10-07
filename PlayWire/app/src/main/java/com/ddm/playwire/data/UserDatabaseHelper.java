@@ -42,7 +42,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public void insertUser(User user) {
+    public Long insertUser(User user) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -51,6 +51,8 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(context, result);
+
+        return result;
     }
 
     public User loadUserByCredentials(String username, String password){
@@ -64,10 +66,28 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
             while(cursor.moveToNext()){
 
                 int userId = Integer.parseInt(cursor.getString(0));
-                String username1 = cursor.getString(1);
-                String password1 = cursor.getString(2);
 
-                user = new User(userId, username1, password1);
+                user = new User(userId, username, password);
+            }
+        }
+
+        return user;
+    }
+
+    public User loadByUserId(int userId){
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = "+ userId;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        User user = null;
+
+        if(sqLiteDatabase != null){
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while(cursor.moveToNext()){
+
+                String username = cursor.getString(1);
+                String password = cursor.getString(2);
+
+                user = new User(userId, username, password);
             }
         }
 

@@ -41,6 +41,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_review_form, container, false);
+        MenuActivity activity = (MenuActivity) getActivity();
 
         spFeedback = rootView.findViewById(R.id.spFeedback);
         @SuppressLint("ResourceType") ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.game_review_score, R.drawable.spinner_item_layout);
@@ -59,9 +60,8 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),
                     feedback,
-                    new User(1,"jek","123")));
+                    activity.getSessionUser()));
 
-            MenuActivity activity = (MenuActivity) getActivity();
             activity.replaceFragment(new FeedFragment());
         });
 

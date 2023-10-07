@@ -14,7 +14,7 @@ import com.ddm.playwire.models.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    EditText etUsername, etPassword;
+    private EditText etUsername, etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
             if(user != null){
                 Toast.makeText(view.getContext(), "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(view.getContext(), MenuActivity.class);
+                intent.putExtra("userId", user.getUserId());
                 startActivity(intent);
             }
             else{

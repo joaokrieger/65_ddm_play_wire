@@ -73,11 +73,13 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             while(cursor.moveToNext()){
 
-                User user = new User(1, "JEK", "123");
                 int id = Integer.parseInt(cursor.getString(0));
                 String gameTitle = cursor.getString(1);
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
+
+                UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this.context);
+                User user = userDatabaseHelper.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 Review review = new Review(id, gameTitle, reviewDescription, feedback, user);
                 reviews.add(review);
@@ -97,16 +99,27 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             while(cursor.moveToNext()){
 
-                User user = new User(1, "JEK", "123");
                 int id = Integer.parseInt(cursor.getString(0));
                 String gameTitle = cursor.getString(1);
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
+
+                UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this.context);
+                User user = userDatabaseHelper.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 review = new Review(id, gameTitle, reviewDescription, feedback, user);
             }
         }
 
         return review;
+    }
+
+    public void deleteReview(Review review) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        String query = "_id = ?";
+        String[] whereArgs = { String.valueOf(review.getReviewId()) };
+
+        long result = sqLiteDatabase.delete(TABLE_NAME, query, whereArgs);
+        SQLiteManager.checkExecSql(context, result);
     }
 }

@@ -49,7 +49,7 @@ public class ReviewAdapter extends BaseAdapter {
         TextView tvFeedback = item.findViewById(R.id.tvFeedback);
 
         tvGameTitle.setText(review.getGameTitle());
-        tvUserName.setText("Steve");
+        tvUserName.setText(review.getUser().getUsername());
         tvReviewDescription.setText(review.getReviewDescription());
         tvFeedback.setText(review.getFeedback());
 

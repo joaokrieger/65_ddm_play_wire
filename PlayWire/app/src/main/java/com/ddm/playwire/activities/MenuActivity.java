@@ -7,15 +7,18 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
+import com.ddm.playwire.data.UserDatabaseHelper;
 import com.ddm.playwire.fragments.FeedFragment;
 import com.ddm.playwire.fragments.ProfileFragment;
 import com.ddm.playwire.R;
 import com.ddm.playwire.fragments.RankFragment;
 import com.ddm.playwire.databinding.ActivityMenuBinding;
+import com.ddm.playwire.models.User;
 
 public class MenuActivity extends AppCompatActivity {
 
-    ActivityMenuBinding binding;
+    private ActivityMenuBinding binding;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,9 @@ public class MenuActivity extends AppCompatActivity {
         replaceFragment(new FeedFragment());
 
         getSupportActionBar().hide();
+
+        int userId = getIntent().getIntExtra("userId", -1);
+        this.loadUser(userId);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
 
@@ -42,6 +48,17 @@ public class MenuActivity extends AppCompatActivity {
 
             return true;
         });
+    }
+
+    private void loadUser(int userId){
+        if(userId != -1){
+            UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this);
+            this.user = userDatabaseHelper.loadByUserId(userId);
+        }
+    }
+
+    public User getSessionUser(){
+        return this.user;
     }
 
     public void replaceFragment(Fragment fragment){

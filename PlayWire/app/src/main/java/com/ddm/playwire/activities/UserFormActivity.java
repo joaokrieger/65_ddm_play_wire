@@ -2,6 +2,7 @@ package com.ddm.playwire.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,7 +14,7 @@ import com.ddm.playwire.models.User;
 
 public class UserFormActivity extends AppCompatActivity {
 
-    EditText etUsername, etPassword, etPasswordConfirm;
+    private EditText etUsername, etPassword, etPasswordConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,11 @@ public class UserFormActivity extends AppCompatActivity {
             }
             else{
                 UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(view.getContext());
-                userDatabaseHelper.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
+                Long userId = userDatabaseHelper.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
+
+                Intent intent = new Intent(view.getContext(), UserFormActivity.class);
+                intent.putExtra("userId", userId);
+                startActivity(intent);
             }
         });
     }

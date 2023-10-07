@@ -22,10 +22,10 @@ import com.ddm.playwire.models.User;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    EditText etGameTitle, etReviewDescription;
-    Spinner spFeedback;
-    Button btnRegisterReview;
-    String feedback;
+    private EditText etGameTitle, etReviewDescription;
+    private Spinner spFeedback;
+    private Button btnRegisterReview;
+    private String feedback;
 
     public static ReviewFormFragment newInstance() {
         ReviewFormFragment fragment = new ReviewFormFragment();

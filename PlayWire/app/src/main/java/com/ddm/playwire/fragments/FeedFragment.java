@@ -69,7 +69,8 @@ public class FeedFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MenuActivity activity = (MenuActivity) getActivity();
-                activity.replaceFragment(new ReviewFormFragment());
+                int reviewId = reviews.get(i).getReviewId();
+                activity.replaceFragment(new ReviewDetailFragment(reviewId));
             }
         });
     }

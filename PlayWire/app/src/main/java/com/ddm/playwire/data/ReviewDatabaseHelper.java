@@ -86,4 +86,27 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
 
         return reviews;
     }
+
+    public Review loadByReviewId(int reviewId) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        Review review = null;
+
+        if(sqLiteDatabase != null){
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while(cursor.moveToNext()){
+
+                User user = new User(1, "JEK", "123");
+                int id = Integer.parseInt(cursor.getString(0));
+                String gameTitle = cursor.getString(1);
+                String reviewDescription = cursor.getString(2);
+                String feedback = cursor.getString(3);
+
+                review = new Review(id, gameTitle, reviewDescription, feedback, user);
+            }
+        }
+
+        return review;
+    }
 }

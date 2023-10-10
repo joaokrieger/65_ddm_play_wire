@@ -8,7 +8,7 @@
     android:paddingLeft="20dp"
     android:paddingTop="50dp"
     android:paddingRight="20dp"
-    tools:context=".fragments.ReviewFormFragment">
+    tools:context=".ui.fragments.ReviewFormFragment">
 
     <TextView
         android:id="@+id/tvFormReview"
@@ -34,7 +34,8 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#5EFFFFFF" />
+        android:textColorHint="#5EFFFFFF"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/etReviewDescription"
@@ -51,7 +52,8 @@
         android:paddingRight="5dp"
         android:paddingBottom="5dp"
         android:textColor="#FFFFFF"
-        android:textColorHint="#5EFFFFFF" />
+        android:textColorHint="#5EFFFFFF"
+        android:textSize="16sp" />
 
     <Spinner
         android:id="@+id/spFeedback"

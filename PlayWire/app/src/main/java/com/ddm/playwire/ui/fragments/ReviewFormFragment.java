@@ -1,4 +1,4 @@
-package com.ddm.playwire.fragments;
+package com.ddm.playwire.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -15,10 +15,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.activities.MenuActivity;
-import com.ddm.playwire.data.ReviewDatabaseHelper;
-import com.ddm.playwire.models.Review;
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.ui.activities.MenuActivity;
+import com.ddm.playwire.dao.ReviewDao;
+import com.ddm.playwire.model.Review;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -54,9 +53,9 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         btnRegisterReview = rootView.findViewById(R.id.btnRegisterReview);
 
         btnRegisterReview.setOnClickListener(view -> {
-            ReviewDatabaseHelper reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
+            ReviewDao reviewDao = new ReviewDao(getContext());
 
-            reviewDatabaseHelper.insertReview(new Review(
+            reviewDao.insertReview(new Review(
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),
                     feedback,

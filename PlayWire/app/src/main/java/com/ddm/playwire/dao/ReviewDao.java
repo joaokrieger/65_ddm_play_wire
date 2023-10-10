@@ -1,4 +1,4 @@
-package com.ddm.playwire.data;
+package com.ddm.playwire.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,13 +8,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.ddm.playwire.models.Review;
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.model.Review;
+import com.ddm.playwire.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDatabaseHelper extends SQLiteOpenHelper {
+public class ReviewDao extends SQLiteOpenHelper {
 
     private Context context;
 
@@ -26,7 +26,7 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FEEDBACK = "feedback";
     private static final String COLUMN_USER_ID = "user_id";
 
-    public ReviewDatabaseHelper(@Nullable Context context) {
+    public ReviewDao(@Nullable Context context) {
         super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
         this.context = context;
     }
@@ -78,8 +78,8 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
 
-                UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this.context);
-                User user = userDatabaseHelper.loadByUserId(Integer.parseInt(cursor.getString(4)));
+                UserDao userDao = new UserDao(this.context);
+                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 Review review = new Review(id, gameTitle, reviewDescription, feedback, user);
                 reviews.add(review);
@@ -104,8 +104,8 @@ public class ReviewDatabaseHelper extends SQLiteOpenHelper {
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
 
-                UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this.context);
-                User user = userDatabaseHelper.loadByUserId(Integer.parseInt(cursor.getString(4)));
+                UserDao userDao = new UserDao(this.context);
+                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 review = new Review(id, gameTitle, reviewDescription, feedback, user);
             }

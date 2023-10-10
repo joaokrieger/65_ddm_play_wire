@@ -1,4 +1,4 @@
-package com.ddm.playwire.activities;
+package com.ddm.playwire.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -7,13 +7,12 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.ddm.playwire.data.UserDatabaseHelper;
-import com.ddm.playwire.fragments.FeedFragment;
-import com.ddm.playwire.fragments.ProfileFragment;
+import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.ui.fragments.FeedFragment;
+import com.ddm.playwire.ui.fragments.ProfileFragment;
 import com.ddm.playwire.R;
-import com.ddm.playwire.fragments.RankFragment;
-import com.ddm.playwire.databinding.ActivityMenuBinding;
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.ui.fragments.RankFragment;
+import com.ddm.playwire.model.User;
 
 public class MenuActivity extends AppCompatActivity {
 
@@ -52,8 +51,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private void loadUser(int userId){
         if(userId != -1){
-            UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(this);
-            this.user = userDatabaseHelper.loadByUserId(userId);
+            UserDao userDao = new UserDao(this);
+            this.user = userDao.loadByUserId(userId);
         }
     }
 

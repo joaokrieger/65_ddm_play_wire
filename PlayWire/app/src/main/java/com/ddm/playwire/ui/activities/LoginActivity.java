@@ -1,4 +1,4 @@
-package com.ddm.playwire.activities;
+package com.ddm.playwire.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.data.UserDatabaseHelper;
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -26,8 +26,8 @@ public class LoginActivity extends AppCompatActivity {
 
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(view -> {
-            UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(view.getContext());
-            User user = userDatabaseHelper.loadUserByCredentials(etUsername.getText().toString(), etPassword.getText().toString());
+            UserDao userDao = new UserDao(view.getContext());
+            User user = userDao.loadUserByCredentials(etUsername.getText().toString(), etPassword.getText().toString());
 
             if(user != null){
                 Toast.makeText(view.getContext(), "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();

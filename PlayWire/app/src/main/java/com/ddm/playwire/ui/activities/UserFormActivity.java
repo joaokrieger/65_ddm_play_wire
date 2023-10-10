@@ -1,4 +1,4 @@
-package com.ddm.playwire.activities;
+package com.ddm.playwire.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,8 +9,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.data.UserDatabaseHelper;
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.model.User;
 
 public class UserFormActivity extends AppCompatActivity {
 
@@ -39,8 +39,8 @@ public class UserFormActivity extends AppCompatActivity {
                 Toast.makeText(view.getContext(), "A senha e a confirmação de senha não correspondem!", Toast.LENGTH_SHORT).show();
             }
             else{
-                UserDatabaseHelper userDatabaseHelper = new UserDatabaseHelper(view.getContext());
-                Long userId = userDatabaseHelper.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
+                UserDao userDao = new UserDao(view.getContext());
+                Long userId = userDao.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
 
                 Intent intent = new Intent(view.getContext(), UserFormActivity.class);
                 intent.putExtra("userId", userId);

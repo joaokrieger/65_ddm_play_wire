@@ -1,4 +1,4 @@
-package com.ddm.playwire.data;
+package com.ddm.playwire.dao;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.ddm.playwire.models.User;
+import com.ddm.playwire.model.User;
 
-public class UserDatabaseHelper extends SQLiteOpenHelper {
+public class UserDao extends SQLiteOpenHelper {
 
     private Context context;
 
@@ -20,7 +20,7 @@ public class UserDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
 
-    public UserDatabaseHelper(@Nullable Context context) {
+    public UserDao(@Nullable Context context) {
         super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
         this.context = context;
     }

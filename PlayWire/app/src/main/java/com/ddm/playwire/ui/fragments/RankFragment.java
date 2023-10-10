@@ -1,4 +1,4 @@
-package com.ddm.playwire.fragments;
+package com.ddm.playwire.ui.fragments;
 
 import android.os.Bundle;
 
@@ -12,7 +12,7 @@ import com.ddm.playwire.R;
 
 public class RankFragment extends Fragment {
 
-    public static RankFragment newInstance(String param1, String param2) {
+    public static RankFragment newInstance() {
         RankFragment fragment = new RankFragment();
         return fragment;
     }

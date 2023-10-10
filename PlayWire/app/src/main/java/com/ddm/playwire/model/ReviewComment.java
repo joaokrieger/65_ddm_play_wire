@@ -1,4 +1,4 @@
-package com.ddm.playwire.models;
+package com.ddm.playwire.model;
 
 public class ReviewComment {
 

@@ -14,15 +14,15 @@
         android:theme="@style/Theme.PlayWire"
         tools:targetApi="31">
         <activity
-            android:name=".activities.UserFormActivity"
+            android:name=".ui.activities.UserFormActivity"
             android:exported="false"
-            android:parentActivityName=".activities.LoginActivity"/>
+            android:parentActivityName=".ui.activities.LoginActivity"/>
         <activity
-            android:name=".activities.MenuActivity"
+            android:name=".ui.activities.MenuActivity"
             android:exported="false"
-            android:parentActivityName=".activities.MenuActivity"/>
+            android:parentActivityName=".ui.activities.MenuActivity"/>
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".ui.activities.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

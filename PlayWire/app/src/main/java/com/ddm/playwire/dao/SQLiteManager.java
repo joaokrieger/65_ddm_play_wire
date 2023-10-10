@@ -1,4 +1,4 @@
-package com.ddm.playwire.data;
+package com.ddm.playwire.dao;
 
 import android.content.Context;
 import android.widget.Toast;

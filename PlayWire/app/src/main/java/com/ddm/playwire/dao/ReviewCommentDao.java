@@ -1,4 +1,4 @@
-package com.ddm.playwire.data;
+package com.ddm.playwire.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class ReviewCommentDatabaseHelper extends SQLiteOpenHelper {
+public class ReviewCommentDao extends SQLiteOpenHelper {
 
     private Context context;
     private static final String TABLE_NAME = "review_comment";
@@ -16,7 +16,7 @@ public class ReviewCommentDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_USER = "id_user";
     private static final String COLUMN_COMMENT = "comment";
 
-    public ReviewCommentDatabaseHelper(@Nullable Context context) {
+    public ReviewCommentDao(@Nullable Context context) {
         super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
         this.context = context;
     }

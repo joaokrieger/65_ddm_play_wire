@@ -1,4 +1,4 @@
-package com.ddm.playwire.fragments;
+package com.ddm.playwire.ui.fragments;
 
 import android.os.Bundle;
 

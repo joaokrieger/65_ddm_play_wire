@@ -1,10 +1,9 @@
-package com.ddm.playwire.fragments;
+package com.ddm.playwire.ui.fragments;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.activities.MenuActivity;
-import com.ddm.playwire.data.ReviewDatabaseHelper;
-import com.ddm.playwire.models.Review;
+import com.ddm.playwire.ui.activities.MenuActivity;
+import com.ddm.playwire.dao.ReviewDao;
+import com.ddm.playwire.model.Review;
 
 public class ReviewDetailFragment extends Fragment {
 
     private static int reviewId;
     private View rootView;
-    private ReviewDatabaseHelper reviewDatabaseHelper;
+    private ReviewDao reviewDao;
     private EditText etGameTitlePreview, etReviewDescriptionPreview, etFeedbackPreview;
     private TextView tvReviewIdentifier;
     private Button btnRemove;
@@ -45,8 +44,8 @@ public class ReviewDetailFragment extends Fragment {
 
         MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_review_detail, container, false);
-        reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
-        Review review = reviewDatabaseHelper.loadByReviewId(reviewId);
+        reviewDao = new ReviewDao(getContext());
+        Review review = reviewDao.loadByReviewId(reviewId);
 
         btnRemove = rootView.findViewById(R.id.btnRemove);
 
@@ -55,8 +54,8 @@ public class ReviewDetailFragment extends Fragment {
         }
         else{
             btnRemove.setOnClickListener(view -> {
-                ReviewDatabaseHelper reviewDatabaseHelper = new ReviewDatabaseHelper(getContext());
-                reviewDatabaseHelper.deleteReview(review);
+                ReviewDao reviewDao = new ReviewDao(getContext());
+                reviewDao.deleteReview(review);
                 activity.replaceFragment(new FeedFragment());
             });
         }

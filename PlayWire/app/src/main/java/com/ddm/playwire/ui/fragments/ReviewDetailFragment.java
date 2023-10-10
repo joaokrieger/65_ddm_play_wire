@@ -45,7 +45,7 @@ public class ReviewDetailFragment extends Fragment {
         MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_review_detail, container, false);
         reviewDao = new ReviewDao(getContext());
-        Review review = reviewDao.loadByReviewId(reviewId);
+        Review review = reviewDao.loadById(reviewId);
 
         btnRemove = rootView.findViewById(R.id.btnRemove);
 
@@ -55,7 +55,7 @@ public class ReviewDetailFragment extends Fragment {
         else{
             btnRemove.setOnClickListener(view -> {
                 ReviewDao reviewDao = new ReviewDao(getContext());
-                reviewDao.deleteReview(review);
+                reviewDao.delete(review);
                 activity.replaceFragment(new FeedFragment());
             });
         }

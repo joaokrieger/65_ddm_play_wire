@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 
 import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.databinding.ActivityMenuBinding;
 import com.ddm.playwire.ui.fragments.FeedFragment;
 import com.ddm.playwire.ui.fragments.ProfileFragment;
 import com.ddm.playwire.R;

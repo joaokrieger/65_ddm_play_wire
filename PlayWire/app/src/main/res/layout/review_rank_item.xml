@@ -36,26 +36,26 @@
 
             <TextView
                 android:id="@+id/tvReviewCount"
-                android:layout_width="248dp"
+                android:layout_width="125dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:text="10 análise(s)"
                 android:textColor="#FFFFFF" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_feed_item"
                 android:gravity="center_vertical"
-                android:minWidth="150dp"
+                android:minWidth="250dp"
                 android:padding="8dp"
                 android:textAlignment="center">
 
                 <TextView
-                    android:id="@+id/tvFeedbackRank"
-                    android:layout_width="136dp"
+                    android:id="@+id/tvRankPosition"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Excelente"
+                    android:text="Top 1"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"
                     android:textStyle="bold" />

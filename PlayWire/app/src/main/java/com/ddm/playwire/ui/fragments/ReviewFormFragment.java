@@ -55,7 +55,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         btnRegisterReview.setOnClickListener(view -> {
             ReviewDao reviewDao = new ReviewDao(getContext());
 
-            reviewDao.insertReview(new Review(
+            reviewDao.insert(new Review(
                     etGameTitle.getText().toString(),
                     etReviewDescription.getText().toString(),
                     feedback,

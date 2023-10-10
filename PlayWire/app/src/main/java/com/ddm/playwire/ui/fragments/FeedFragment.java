@@ -12,7 +12,7 @@ import android.widget.ListView;
 
 import com.ddm.playwire.R;
 import com.ddm.playwire.ui.activities.MenuActivity;
-import com.ddm.playwire.adapter.ReviewFeedAdapter;
+import com.ddm.playwire.ui.adapter.ReviewFeedAdapter;
 import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.model.Review;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -58,7 +58,7 @@ public class FeedFragment extends Fragment {
     public void displayData(){
         feed = rootView.findViewById(R.id.lvFeed);
         reviewDao = new ReviewDao(getContext());
-        List<Review> reviews = reviewDao.listReview();
+        List<Review> reviews = reviewDao.listAll();
 
         ReviewFeedAdapter reviewFeedAdapter = new ReviewFeedAdapter(getContext(), reviews);
 

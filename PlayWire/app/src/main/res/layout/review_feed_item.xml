@@ -65,7 +65,7 @@
                 android:textAlignment="center">
 
                 <TextView
-                    android:id="@+id/tvFeedbackRank"
+                    android:id="@+id/tvRankPosition"
                     android:layout_width="136dp"
                     android:layout_height="wrap_content"
                     android:text="Excelente"

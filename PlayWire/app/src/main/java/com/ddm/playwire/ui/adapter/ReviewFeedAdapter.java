@@ -1,4 +1,4 @@
-package com.ddm.playwire.adapter;
+package com.ddm.playwire.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,12 +12,12 @@ import com.ddm.playwire.model.Review;
 
 import java.util.List;
 
-public class ReviewRankAdapter extends BaseAdapter {
+public class ReviewFeedAdapter extends BaseAdapter {
 
     private Context context;
     private List<Review> reviews;
 
-    public ReviewRankAdapter(Context context, List<Review> reviews) {
+    public ReviewFeedAdapter(Context context, List<Review> reviews) {
         this.context = context;
         this.reviews = reviews;
     }
@@ -40,12 +40,18 @@ public class ReviewRankAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View item = inflater.inflate(R.layout.review_rank_item, viewGroup, false);
+        View item = inflater.inflate(R.layout.review_feed_item, viewGroup, false);
         Review review = reviews.get(position);
 
-        TextView tvGameTitleRank = item.findViewById(R.id.tvGameTitleRank);
-        TextView tvReviewCount = item.findViewById(R.id.tvReviewCount);
-        TextView tvFeedbackRank = item.findViewById(R.id.tvFeedbackRank);
+        TextView tvGameTitle = item.findViewById(R.id.tvGameTitleRank);
+        TextView tvUserName = item.findViewById(R.id.tvUserName);
+        TextView tvReviewDescription = item.findViewById(R.id.tvReviewCount);
+        TextView tvFeedback = item.findViewById(R.id.tvRankPosition);
+
+        tvGameTitle.setText(review.getGameTitle());
+        tvUserName.setText(review.getUser().getUsername());
+        tvReviewDescription.setText(review.getReviewDescription());
+        tvFeedback.setText(review.getFeedback());
 
         return item;
     }

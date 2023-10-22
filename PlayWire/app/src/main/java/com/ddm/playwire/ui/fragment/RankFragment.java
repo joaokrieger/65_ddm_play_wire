@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragments;
+package com.ddm.playwire.ui.fragment;
 
 import android.os.Bundle;
 
@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.ddm.playwire.R;
 import com.ddm.playwire.dao.ReviewDao;
@@ -19,7 +18,7 @@ import java.util.List;
 public class RankFragment extends Fragment {
 
     private View rootView;
-    private ListView rank;
+    private ListView lvRank;
     private ReviewDao reviewDao;
 
     public static RankFragment newInstance() {
@@ -42,11 +41,11 @@ public class RankFragment extends Fragment {
 
     private void displayData() {
 
-        rank = rootView.findViewById(R.id.lvRank);
+        lvRank = rootView.findViewById(R.id.lvRank);
         reviewDao = new ReviewDao(getContext());
         List<String[]> reviews = reviewDao.listRank();
 
         ReviewRankAdapter reviewRankAdapter = new ReviewRankAdapter(getContext(), reviews);
-        rank.setAdapter(reviewRankAdapter);
+        lvRank.setAdapter(reviewRankAdapter);
     }
 }

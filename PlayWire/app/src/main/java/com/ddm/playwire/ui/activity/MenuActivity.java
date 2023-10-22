@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.activities;
+package com.ddm.playwire.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -9,10 +9,10 @@ import android.os.Bundle;
 
 import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.databinding.ActivityMenuBinding;
-import com.ddm.playwire.ui.fragments.FeedFragment;
-import com.ddm.playwire.ui.fragments.ProfileFragment;
+import com.ddm.playwire.ui.fragment.FeedFragment;
+import com.ddm.playwire.ui.fragment.ProfileFragment;
 import com.ddm.playwire.R;
-import com.ddm.playwire.ui.fragments.RankFragment;
+import com.ddm.playwire.ui.fragment.RankFragment;
 import com.ddm.playwire.model.User;
 
 public class MenuActivity extends AppCompatActivity {

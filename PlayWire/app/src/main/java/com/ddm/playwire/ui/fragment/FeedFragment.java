@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragments;
+package com.ddm.playwire.ui.fragment;
 
 import android.os.Bundle;
 
@@ -11,7 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.ui.activities.MenuActivity;
+import com.ddm.playwire.ui.activity.MenuActivity;
 import com.ddm.playwire.ui.adapter.ReviewFeedAdapter;
 import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.model.Review;
@@ -24,7 +24,7 @@ public class FeedFragment extends Fragment {
     private FloatingActionButton fabAddReview;
     private ReviewDao reviewDao;
     private View rootView;
-    private ListView feed;
+    private ListView lvFeed;
 
     public static FeedFragment newInstance() {
         FeedFragment fragment = new FeedFragment();
@@ -56,15 +56,15 @@ public class FeedFragment extends Fragment {
     }
 
     public void displayData(){
-        feed = rootView.findViewById(R.id.lvFeed);
+        lvFeed = rootView.findViewById(R.id.lvFeed);
         reviewDao = new ReviewDao(getContext());
         List<Review> reviews = reviewDao.listAll();
 
         ReviewFeedAdapter reviewFeedAdapter = new ReviewFeedAdapter(getContext(), reviews);
 
-        feed.setAdapter(reviewFeedAdapter);
+        lvFeed.setAdapter(reviewFeedAdapter);
 
-        feed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lvFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 MenuActivity activity = (MenuActivity) getActivity();

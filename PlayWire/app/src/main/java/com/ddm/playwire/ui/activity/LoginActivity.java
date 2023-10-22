@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.activities;
+package com.ddm.playwire.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

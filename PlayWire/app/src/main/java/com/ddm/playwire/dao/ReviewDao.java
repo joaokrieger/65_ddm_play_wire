@@ -73,7 +73,7 @@ public class ReviewDao extends SQLiteOpenHelper {
     }
 
     public List<Review> listAll(){
-        String query = "SELECT * FROM " + TABLE_NAME;
+        String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY 1 DESC";
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 
         List<Review> reviews = new ArrayList<>();

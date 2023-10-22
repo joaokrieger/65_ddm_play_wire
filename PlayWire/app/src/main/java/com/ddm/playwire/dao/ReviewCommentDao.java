@@ -40,4 +40,5 @@ public class ReviewCommentDao extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(query);
         onCreate(sqLiteDatabase);
     }
+
 }

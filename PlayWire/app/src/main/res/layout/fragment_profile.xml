@@ -1,89 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#1E2127"
-    android:orientation="vertical"
+    android:fillViewport="true"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
     tools:context=".ui.fragment.ProfileFragment">
 
-    <TextView
-        android:id="@+id/tvUsernameProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="30dp"
-        android:text="Steve"
-        android:textColor="#B7B7B7"
-        android:textSize="24sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/tvUserCountReview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="10 análise(s)"
-        android:textColor="#B7B7B7"
-        android:textSize="16sp" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tvFavouriteGame"
+            android:id="@+id/tvUsernameProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="30dp"
-            android:text="Melhores Jogos"
+            android:text="Steve"
             android:textColor="#B7B7B7"
             android:textSize="24sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tvFavouriteGameSubtitle"
+            android:id="@+id/tvUserCountReview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Segundo análises do Usuário"
+            android:text="10 análise(s)"
             android:textColor="#B7B7B7"
             android:textSize="16sp" />
 
-        <ListView
-            android:id="@+id/lvFavouriteGame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tvUnfavouriteGame"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="30dp"
-            android:text="Piores Jogos"
-            android:textColor="#B7B7B7"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tvUnfavouriteGameSubtitle"
+            <TextView
+                android:id="@+id/tvFavouriteGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="30dp"
+                android:text="Melhores Jogos"
+                android:textColor="#B7B7B7"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFavouriteGameSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Segundo análises do Usuário"
+                android:textColor="#B7B7B7"
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/lvFavouriteGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Segundo análises do Usuário"
-            android:textColor="#B7B7B7"
-            android:textSize="16sp" />
+            android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/lvUnfavouriteGame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tvUnfavouriteGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:text="Piores Jogos"
+                android:textColor="#B7B7B7"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUnfavouriteGameSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:text="Segundo análises do Usuário"
+                android:textColor="#B7B7B7"
+                android:textSize="16sp" />
+
+            <ListView
+                android:id="@+id/lvUnfavouriteGame"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>

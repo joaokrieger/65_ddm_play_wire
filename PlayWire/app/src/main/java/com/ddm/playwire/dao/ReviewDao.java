@@ -130,6 +130,55 @@ public class ReviewDao extends SQLiteOpenHelper {
         return reviews;
     }
 
+    public List<String[]> listRankByUser(int userId, String order){
+
+        String query = "SELECT " + COLUMN_GAME_TITLE + ", COUNT(*) AS review_count, AVG(CASE " +
+                "  WHEN " + COLUMN_FEEDBACK + " = 'Excelente' THEN 5 " +
+                "  WHEN " + COLUMN_FEEDBACK + " = 'Bom' THEN 4 " +
+                "  WHEN " + COLUMN_FEEDBACK + " = 'Regular' THEN 3 " +
+                "  WHEN " + COLUMN_FEEDBACK + " = 'Insatisfatório' THEN 2 " +
+                "  ELSE 1 END) AS avg_feedback " +
+                " FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_USER_ID + " = " + userId +
+                " GROUP BY " + COLUMN_GAME_TITLE +
+                " ORDER BY avg_feedback " + order +
+                " LIMIT 5";
+
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        List<String[]> reviews = new ArrayList<>();
+        if(sqLiteDatabase != null){
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while(cursor.moveToNext()){
+
+                String gameTitle = cursor.getString(0);
+                int reviewCount = cursor.getInt(1);
+                int feedbackAvg = cursor.getInt(2);
+
+                String[] reviewData = {gameTitle, String.valueOf(reviewCount), String.valueOf(feedbackAvg)};
+                reviews.add(reviewData);
+            }
+        }
+
+        return reviews;
+    }
+
+    public int getCountReviewByUser(int userId){
+        String query = "SELECT COUNT(*) FROM " + TABLE_NAME;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        int countReview = 0;
+
+        if(sqLiteDatabase != null) {
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while (cursor.moveToNext()) {
+                countReview = Integer.parseInt(cursor.getString(0));
+            }
+        }
+
+        return countReview;
+    }
+
     public Review loadById(int reviewId) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();

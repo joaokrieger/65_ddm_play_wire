@@ -43,9 +43,9 @@ public class ReviewFeedAdapter extends BaseAdapter {
         View item = inflater.inflate(R.layout.review_feed_item, viewGroup, false);
         Review review = reviews.get(position);
 
-        TextView tvGameTitle = item.findViewById(R.id.tvGameTitleRank);
+        TextView tvGameTitle = item.findViewById(R.id.tvUsernameComment);
         TextView tvUserName = item.findViewById(R.id.tvUserName);
-        TextView tvReviewDescription = item.findViewById(R.id.tvReviewCount);
+        TextView tvReviewDescription = item.findViewById(R.id.tvComment);
         TextView tvFeedback = item.findViewById(R.id.tvRankPosition);
 
         tvGameTitle.setText(review.getGameTitle());

@@ -24,6 +24,7 @@ public class ReviewDetailFragment extends Fragment {
     private EditText etGameTitlePreview, etReviewDescriptionPreview, etFeedbackPreview;
     private TextView tvReviewIdentifier;
     private Button btnRemove;
+    private Button btnReviewComments;
 
     public ReviewDetailFragment(int reviewId) {
         this.reviewId = reviewId;
@@ -45,7 +46,7 @@ public class ReviewDetailFragment extends Fragment {
         MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_review_detail, container, false);
         reviewDao = new ReviewDao(getContext());
-        Review review = reviewDao.loadById(reviewId);
+        Review review = reviewDao.loadByReviewId(reviewId);
 
         btnRemove = rootView.findViewById(R.id.btnRemove);
 
@@ -70,6 +71,11 @@ public class ReviewDetailFragment extends Fragment {
             etGameTitlePreview.setText(review.getGameTitle());
             etReviewDescriptionPreview.setText(review.getReviewDescription());
             etFeedbackPreview.setText(review.getFeedback());
+
+            btnReviewComments = rootView.findViewById(R.id.btnReviewComments);
+            btnReviewComments.setOnClickListener(view -> {
+                activity.replaceFragment(new ReviewCommentFragment(reviewId));
+            });
         }
 
         return rootView;

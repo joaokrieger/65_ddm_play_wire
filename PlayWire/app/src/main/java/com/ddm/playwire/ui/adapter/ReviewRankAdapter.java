@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
@@ -48,8 +47,8 @@ public class ReviewRankAdapter extends BaseAdapter {
         String reviewCount= reviewData[1];
         String feedbackAvg = reviewData[2];
 
-        TextView tvGameTitleRank = item.findViewById(R.id.tvGameTitleRank);
-        TextView tvReviewCount = item.findViewById(R.id.tvReviewCount);
+        TextView tvGameTitleRank = item.findViewById(R.id.tvUsernameComment);
+        TextView tvReviewCount = item.findViewById(R.id.tvComment);
         TextView tvRankPosition = item.findViewById(R.id.tvRankPosition);
 
         tvGameTitleRank.setText(gameTitle);

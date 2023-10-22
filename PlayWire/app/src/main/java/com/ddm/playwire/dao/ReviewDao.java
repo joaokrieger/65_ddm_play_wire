@@ -179,7 +179,7 @@ public class ReviewDao extends SQLiteOpenHelper {
         return countReview;
     }
 
-    public Review loadById(int reviewId) {
+    public Review loadByReviewId(int reviewId) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
 

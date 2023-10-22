@@ -12,7 +12,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tvGameTitleRank"
+            android:id="@+id/tvUsernameComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Call of Duty"
@@ -42,7 +42,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/tvReviewCount"
+            android:id="@+id/tvComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Call of Duty Modern Warfare é um nome conhecido do público, mas não se engane..."

@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -48,7 +46,7 @@ public class ReviewProfileRankAdapter extends BaseAdapter {
 
         String[] reviewData = reviewRank.get(i);
         String gameTitle = reviewData[0];
-        TextView tvGameTitleRank = item.findViewById(R.id.tvGameTitleRank);
+        TextView tvGameTitleRank = item.findViewById(R.id.tvUsernameComment);
 
         //Realizando a alternância das cores da tabela
         int[] colors = {Color.parseColor("#36373A"), Color.parseColor("#141517")};

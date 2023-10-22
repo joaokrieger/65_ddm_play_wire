@@ -1,10 +1,18 @@
 package com.ddm.playwire.dao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
+
+import com.ddm.playwire.model.Review;
+import com.ddm.playwire.model.ReviewComment;
+import com.ddm.playwire.model.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ReviewCommentDao extends SQLiteOpenHelper {
 
@@ -41,4 +49,31 @@ public class ReviewCommentDao extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+    public List<ReviewComment> listAllByReviewId(int reviewId){
+
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_REVIEW + " = " + reviewId + " ORDER BY 1 DESC";
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+
+        List<ReviewComment> reviewComments = new ArrayList<>();
+
+        if(sqLiteDatabase != null) {
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while (cursor.moveToNext()) {
+
+                int id = Integer.parseInt(cursor.getString(0));
+                String comment = cursor.getString(4);
+
+                ReviewDao reviewDao = new ReviewDao(this.context);
+                Review review = reviewDao.loadByReviewId(Integer.parseInt(cursor.getString(2)));
+
+                UserDao userDao = new UserDao(this.context);
+                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(3)));
+
+                ReviewComment reviewComment = new ReviewComment(id, review, user, comment);
+                reviewComments.add(reviewComment);
+            }
+        }
+
+        return reviewComments;
+    }
 }

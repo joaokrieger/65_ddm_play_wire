@@ -42,7 +42,7 @@ public class UserDao extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public Long insertUser(User user) {
+    public int insertUser(User user) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -52,7 +52,7 @@ public class UserDao extends SQLiteOpenHelper {
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(context, result);
 
-        return result;
+        return (int) result;
     }
 
     public User loadUserByCredentials(String username, String password){

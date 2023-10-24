@@ -50,7 +50,7 @@ public class ReviewDetailFragment extends Fragment {
 
         btnRemove = rootView.findViewById(R.id.btnRemove);
 
-        if(review.getUser().equals(activity.getSessionUser())){
+        if(review.getUser().getUserId() != activity.getSessionUser().getUserId()){
             btnRemove.setVisibility(View.INVISIBLE);
         }
         else{

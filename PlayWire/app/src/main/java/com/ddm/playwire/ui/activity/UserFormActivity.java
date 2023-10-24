@@ -41,9 +41,9 @@ public class UserFormActivity extends AppCompatActivity {
             }
             else{
                 UserDao userDao = new UserDao(view.getContext());
-                Long userId = userDao.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
+                int userId = userDao.insertUser(new User(etUsername.getText().toString(), etPassword.getText().toString()));
 
-                Intent intent = new Intent(view.getContext(), UserFormActivity.class);
+                Intent intent = new Intent(view.getContext(), MenuActivity.class);
                 intent.putExtra("userId", userId);
                 startActivity(intent);
             }

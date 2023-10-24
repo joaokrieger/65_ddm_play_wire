@@ -2,6 +2,7 @@ package com.ddm.playwire.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,8 +10,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
+import com.ddm.playwire.dao.ReviewCommentDao;
+import com.ddm.playwire.dao.SQLiteManager;
 import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.model.User;
+
+import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 
 import com.ddm.playwire.model.User;
 
-public class UserDao extends SQLiteOpenHelper {
+public class UserDao{
 
-    private Context context;
+    private final SQLiteManager sqlLiteManager;
 
     private static final String TABLE_NAME = "user";
 
@@ -21,36 +21,18 @@ public class UserDao extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "password";
 
     public UserDao(@Nullable Context context) {
-        super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
-        this.context = context;
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "CREATE TABLE " + TABLE_NAME + " ("
-                + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COLUMN_USERNAME + " TEXT, "
-                + COLUMN_PASSWORD + " TEXT)";
-
-        sqLiteDatabase.execSQL(query);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        sqLiteDatabase.execSQL(query);
-        onCreate(sqLiteDatabase);
+        this.sqlLiteManager = new SQLiteManager(context);
     }
 
     public int insertUser(User user) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COLUMN_USERNAME, user.getUsername());
         contentValues.put(COLUMN_PASSWORD, user.getPassword());
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
-        SQLiteManager.checkExecSql(context, result);
+        SQLiteManager.checkExecSql(result);
 
         return (int) result;
     }
@@ -58,7 +40,7 @@ public class UserDao extends SQLiteOpenHelper {
     public User loadUserByCredentials(String username, String password){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + " = '"+ username + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
         User user = null;
 
         if(sqLiteDatabase != null){
@@ -77,7 +59,7 @@ public class UserDao extends SQLiteOpenHelper {
     public User loadByUserId(int userId){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = "+ userId;
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
         User user = null;
 
         if(sqLiteDatabase != null){

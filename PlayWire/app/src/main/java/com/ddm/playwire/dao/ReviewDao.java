@@ -14,9 +14,9 @@ import com.ddm.playwire.model.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDao extends SQLiteOpenHelper {
+public class ReviewDao{
 
-    private Context context;
+    private final SQLiteManager sqlLiteManager;
 
     private static final String TABLE_NAME = "review";
 
@@ -27,31 +27,11 @@ public class ReviewDao extends SQLiteOpenHelper {
     private static final String COLUMN_USER_ID = "user_id";
 
     public ReviewDao(@Nullable Context context) {
-        super(context, SQLiteManager.DATABASE_NAME, null, SQLiteManager.DATABASE_VERSION);
-        this.context = context;
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "CREATE TABLE " + TABLE_NAME + " ("
-            + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_GAME_TITLE + " TEXT, "
-            + COLUMN_REVIEW_DESCRIPTION + " TEXT, "
-            + COLUMN_FEEDBACK + " TEXT, "
-            + COLUMN_USER_ID + " INTEGER)";
-
-        sqLiteDatabase.execSQL(query);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
-        sqLiteDatabase.execSQL(query);
-        onCreate(sqLiteDatabase);
+        this.sqlLiteManager = new SQLiteManager(context);
     }
 
     public void insert(Review review){
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(COLUMN_GAME_TITLE, review.getGameTitle());
@@ -60,21 +40,21 @@ public class ReviewDao extends SQLiteOpenHelper {
         contentValues.put(COLUMN_USER_ID, review.getUser().getUserId());
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
-        SQLiteManager.checkExecSql(context, result);
+        SQLiteManager.checkExecSql(result);
     }
 
     public void delete(Review review) {
-        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         String query = "_id = ?";
         String[] whereArgs = { String.valueOf(review.getReviewId()) };
 
         long result = sqLiteDatabase.delete(TABLE_NAME, query, whereArgs);
-        SQLiteManager.checkExecSql(context, result);
+        SQLiteManager.checkExecSql(result);
     }
 
     public List<Review> listAll(){
         String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY 1 DESC";
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         List<Review> reviews = new ArrayList<>();
 
@@ -87,7 +67,7 @@ public class ReviewDao extends SQLiteOpenHelper {
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
 
-                UserDao userDao = new UserDao(this.context);
+                UserDao userDao = new UserDao(sqlLiteManager.getContext());
                 User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 Review review = new Review(id, gameTitle, reviewDescription, feedback, user);
@@ -111,7 +91,7 @@ public class ReviewDao extends SQLiteOpenHelper {
                 " ORDER BY avg_feedback DESC " +
                 " LIMIT 5";
 
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         List<String[]> reviews = new ArrayList<>();
         if(sqLiteDatabase != null){
@@ -144,7 +124,7 @@ public class ReviewDao extends SQLiteOpenHelper {
                 " ORDER BY avg_feedback " + order +
                 " LIMIT 5";
 
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         List<String[]> reviews = new ArrayList<>();
         if(sqLiteDatabase != null){
@@ -165,7 +145,7 @@ public class ReviewDao extends SQLiteOpenHelper {
 
     public int getCountReviewByUser(int userId){
         String query = "SELECT COUNT(*) FROM " + TABLE_NAME;
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         int countReview = 0;
 
@@ -181,7 +161,7 @@ public class ReviewDao extends SQLiteOpenHelper {
 
     public Review loadByReviewId(int reviewId) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         Review review = null;
 
@@ -194,7 +174,7 @@ public class ReviewDao extends SQLiteOpenHelper {
                 String reviewDescription = cursor.getString(2);
                 String feedback = cursor.getString(3);
 
-                UserDao userDao = new UserDao(this.context);
+                UserDao userDao = new UserDao(sqlLiteManager.getContext());
                 User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
 
                 review = new Review(id, gameTitle, reviewDescription, feedback, user);

@@ -1,5 +1,6 @@
 package com.ddm.playwire.dao;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -41,13 +42,13 @@ public class ReviewCommentDao {
             while (cursor.moveToNext()) {
 
                 int id = Integer.parseInt(cursor.getString(0));
-                String comment = cursor.getString(4);
-
                 ReviewDao reviewDao = new ReviewDao(sqlLiteManager.getContext());
-                Review review = reviewDao.loadByReviewId(Integer.parseInt(cursor.getString(2)));
+                Review review = reviewDao.loadByReviewId(Integer.parseInt(cursor.getString(1)));
 
                 UserDao userDao = new UserDao(sqlLiteManager.getContext());
-                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(3)));
+                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(2)));
+
+                String comment = cursor.getString(3);
 
                 ReviewComment reviewComment = new ReviewComment(id, review, user, comment);
                 reviewComments.add(reviewComment);
@@ -55,5 +56,17 @@ public class ReviewCommentDao {
         }
 
         return reviewComments;
+    }
+
+    public void insert(ReviewComment reviewComment){
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(COLUMN_USER, reviewComment.getUser().getUserId());
+        contentValues.put(COLUMN_REVIEW, reviewComment.getReview().getReviewId());
+        contentValues.put(COLUMN_COMMENT, reviewComment.getComment());
+
+        long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
+        SQLiteManager.checkExecSql(result);
     }
 }

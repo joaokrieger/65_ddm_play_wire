@@ -7,14 +7,14 @@ public class ReviewComment {
     private User user;
     private String comment;
 
-    public ReviewComment(int reviewCommentId, Review review, User user, String comment) {
-        this.reviewCommentId = reviewCommentId;
+    public ReviewComment(Review review, User user, String comment) {
         this.review = review;
         this.user = user;
         this.comment = comment;
     }
 
-    public ReviewComment(Review review, User user, String comment) {
+    public ReviewComment(int id, Review review, User user, String comment) {
+        this.reviewCommentId = id;
         this.review = review;
         this.user = user;
         this.comment = comment;

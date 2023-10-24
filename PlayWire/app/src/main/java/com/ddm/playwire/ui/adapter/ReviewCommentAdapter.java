@@ -48,8 +48,8 @@ public class ReviewCommentAdapter extends BaseAdapter {
         TextView tvUsernameComment = item.findViewById(R.id.tvUsernameComment);
         TextView tvComment = item.findViewById(R.id.tvComment);
 
-        tvComment.setText(reviewComment.getUser().getUsername());
-        tvUsernameComment.setText(reviewComment.getComment());
+        tvUsernameComment.setText(reviewComment.getUser().getUsername());
+        tvComment.setText(reviewComment.getComment());
 
         return item;
     }

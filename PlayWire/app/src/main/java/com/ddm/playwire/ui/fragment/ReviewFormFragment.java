@@ -21,6 +21,7 @@ import com.ddm.playwire.model.Review;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    private View rootView;
     private EditText etGameTitle, etReviewDescription;
     private Spinner spFeedback;
     private Button btnRegisterReview;
@@ -39,7 +40,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.fragment_review_form, container, false);
+        rootView = inflater.inflate(R.layout.fragment_review_form, container, false);
         MenuActivity activity = (MenuActivity) getActivity();
 
         spFeedback = rootView.findViewById(R.id.spFeedback);

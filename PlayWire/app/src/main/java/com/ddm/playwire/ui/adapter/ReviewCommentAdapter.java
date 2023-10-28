@@ -38,6 +38,11 @@ public class ReviewCommentAdapter extends BaseAdapter {
         return reviewComments.get(position).getReviewCommentId();
     }
 
+    public void updateData(List<ReviewComment> newComments){
+        this.reviewComments.clear();
+        this.reviewComments.addAll(newComments);
+    }
+
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
 

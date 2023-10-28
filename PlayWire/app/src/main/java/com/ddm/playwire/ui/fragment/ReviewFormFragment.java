@@ -27,11 +27,6 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     private Button btnRegisterReview;
     private String feedback;
 
-    public static ReviewFormFragment newInstance() {
-        ReviewFormFragment fragment = new ReviewFormFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

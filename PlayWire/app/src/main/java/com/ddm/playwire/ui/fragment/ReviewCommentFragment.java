@@ -20,7 +20,6 @@ import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.ui.activity.MenuActivity;
 import com.ddm.playwire.ui.adapter.ReviewCommentAdapter;
-import com.ddm.playwire.ui.adapter.ReviewRankAdapter;
 
 import java.util.List;
 
@@ -40,11 +39,6 @@ public class ReviewCommentFragment extends Fragment {
         this.reviewId = reviewId;
     }
 
-    public static ReviewCommentFragment newInstance() {
-        ReviewCommentFragment fragment = new ReviewCommentFragment(reviewId);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,13 +46,14 @@ public class ReviewCommentFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         rootView = inflater.inflate(R.layout.fragment_review_comment, container, false);
         MenuActivity activity = (MenuActivity) getActivity();
-
         reviewCommentDao = new ReviewCommentDao(getContext());
 
+        //Carregando Review
         reviewDao = new ReviewDao(getContext());
-        Review review = reviewDao.loadByReviewId(reviewId);
+        Review review = reviewDao.loadReviewById(reviewId);
 
         tvReviewCommentTitle = rootView.findViewById(R.id.tvReviewCommentTitle);
         tvReviewCommentTitle.setText("Comentários Análise N° " + review.getReviewId() + " - " + review.getUser().getUsername());
@@ -68,16 +63,17 @@ public class ReviewCommentFragment extends Fragment {
         this.displayData(review.getReviewId());
 
         btnComment = rootView.findViewById(R.id.btnComment);
-
         btnComment.setOnClickListener(view -> {
 
             if(etReviewComment.getText().toString().isEmpty()) {
-                Toast.makeText(view.getContext(), "O campo Comentário é de preenchimento obrigatório!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "É necessário preencher o campo de Comentário!", Toast.LENGTH_SHORT).show();
             }
             else{
                 ReviewComment reviewComment = new ReviewComment(review, activity.getSessionUser(), etReviewComment.getText().toString());
                 reviewCommentDao.insert(reviewComment);
+                reviewCommentAdapter.updateData(reviewCommentDao.listAllByReviewId(reviewId));
                 reviewCommentAdapter.notifyDataSetChanged();
+                etReviewComment.setText("");
             }
         });
 

@@ -25,11 +25,7 @@ public class FeedFragment extends Fragment {
     private ReviewDao reviewDao;
     private View rootView;
     private ListView lvFeed;
-
-    public static FeedFragment newInstance() {
-        FeedFragment fragment = new FeedFragment();
-        return fragment;
-    }
+    private ReviewFeedAdapter reviewFeedAdapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +46,7 @@ public class FeedFragment extends Fragment {
             }
         });
 
-        displayData();
+        this.displayData();
 
         return rootView;
     }
@@ -60,10 +56,8 @@ public class FeedFragment extends Fragment {
         reviewDao = new ReviewDao(getContext());
         List<Review> reviews = reviewDao.listAll();
 
-        ReviewFeedAdapter reviewFeedAdapter = new ReviewFeedAdapter(getContext(), reviews);
-
+        reviewFeedAdapter = new ReviewFeedAdapter(getContext(), reviews);
         lvFeed.setAdapter(reviewFeedAdapter);
-
         lvFeed.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

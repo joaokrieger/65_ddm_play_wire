@@ -26,11 +26,7 @@ public class ProfileFragment extends Fragment {
     private ReviewDao reviewDao;
     private ListView lvFavouriteGame;
     private ListView lvUnfavouriteGame;
-
-    public static ProfileFragment newInstance() {
-        ProfileFragment fragment = new ProfileFragment();
-        return fragment;
-    }
+    private ReviewProfileRankAdapter reviewRankAdapterFav, reviewRankAdapterUnfav;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,13 +53,13 @@ public class ProfileFragment extends Fragment {
         reviewDao = new ReviewDao(getContext());
 
         lvFavouriteGame = rootView.findViewById(R.id.lvFavouriteGame);
-        List<String[]> favoriteReviews = reviewDao.listRankByUser(userId, "DESC");
-        ReviewProfileRankAdapter reviewRankAdapterFav = new ReviewProfileRankAdapter(getContext(), favoriteReviews);
+        List<String[]> favoriteReviews = reviewDao.listFavouriteGamesByUser(userId);
+        reviewRankAdapterFav = new ReviewProfileRankAdapter(getContext(), favoriteReviews);
         lvFavouriteGame.setAdapter(reviewRankAdapterFav);
 
         lvUnfavouriteGame = rootView.findViewById(R.id.lvUnfavouriteGame);
-        List<String[]> unfavoriteReviews = reviewDao.listRankByUser(userId, "ASC");
-        ReviewProfileRankAdapter reviewRankAdapterUnfav = new ReviewProfileRankAdapter(getContext(), unfavoriteReviews);
+        List<String[]> unfavoriteReviews = reviewDao.listUnfavouriteGamesByUser(userId);
+        reviewRankAdapterUnfav = new ReviewProfileRankAdapter(getContext(), unfavoriteReviews);
         lvUnfavouriteGame.setAdapter(reviewRankAdapterUnfav);
 
         tvUserCountReview = rootView.findViewById(R.id.tvUserCountReview);

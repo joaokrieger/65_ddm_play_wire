@@ -21,11 +21,6 @@ public class RankFragment extends Fragment {
     private ListView lvRank;
     private ReviewDao reviewDao;
 
-    public static RankFragment newInstance() {
-        RankFragment fragment = new RankFragment();
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

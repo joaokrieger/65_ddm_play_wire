@@ -24,7 +24,7 @@ public class UserDao{
         this.sqlLiteManager = new SQLiteManager(context);
     }
 
-    public int insertUser(User user) {
+    public int insert(User user) {
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -46,9 +46,7 @@ public class UserDao{
         if(sqLiteDatabase != null){
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             while(cursor.moveToNext()){
-
                 int userId = Integer.parseInt(cursor.getString(0));
-
                 user = new User(userId, username, password);
             }
         }
@@ -56,7 +54,7 @@ public class UserDao{
         return user;
     }
 
-    public User loadByUserId(int userId){
+    public User loadUserById(int userId){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = "+ userId;
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
@@ -65,10 +63,8 @@ public class UserDao{
         if(sqLiteDatabase != null){
             Cursor cursor = sqLiteDatabase.rawQuery(query, null);
             while(cursor.moveToNext()){
-
                 String username = cursor.getString(1);
                 String password = cursor.getString(2);
-
                 user = new User(userId, username, password);
             }
         }

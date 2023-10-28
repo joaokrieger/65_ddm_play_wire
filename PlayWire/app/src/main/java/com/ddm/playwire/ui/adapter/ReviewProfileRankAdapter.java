@@ -48,7 +48,7 @@ public class ReviewProfileRankAdapter extends BaseAdapter {
         String gameTitle = reviewData[0];
         TextView tvGameTitleRank = item.findViewById(R.id.tvUsernameComment);
 
-        //Realizando a alternância das cores da tabela
+        //Realizando a alternância de cores das linhas
         int[] colors = {Color.parseColor("#36373A"), Color.parseColor("#141517")};
 
         TableRow tbReviewItemRow = item.findViewById(R.id.tbReviewItemRow);

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
@@ -68,13 +67,12 @@ public class ReviewDao{
                 String feedback = cursor.getString(3);
 
                 UserDao userDao = new UserDao(sqlLiteManager.getContext());
-                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
+                User user = userDao.loadUserById(Integer.parseInt(cursor.getString(4)));
 
                 Review review = new Review(id, gameTitle, reviewDescription, feedback, user);
                 reviews.add(review);
             }
         }
-
         return reviews;
     }
 
@@ -110,9 +108,17 @@ public class ReviewDao{
         return reviews;
     }
 
-    public List<String[]> listRankByUser(int userId, String order){
+    public List<String[]> listFavouriteGamesByUser(int userId){
+        return this.listRankByUser(userId,"ASC");
+    }
 
-        String query = "SELECT " + COLUMN_GAME_TITLE + ", COUNT(*) AS review_count, AVG(CASE " +
+    public List<String[]> listUnfavouriteGamesByUser(int userId){
+        return this.listRankByUser(userId,"DESC");
+    }
+
+    private List<String[]> listRankByUser(int userId, String order){
+
+        String subquery = "SELECT " + COLUMN_GAME_TITLE + ", COUNT(*) AS review_count, AVG(CASE " +
                 "  WHEN " + COLUMN_FEEDBACK + " = 'Excelente' THEN 5 " +
                 "  WHEN " + COLUMN_FEEDBACK + " = 'Bom' THEN 4 " +
                 "  WHEN " + COLUMN_FEEDBACK + " = 'Regular' THEN 3 " +
@@ -120,8 +126,12 @@ public class ReviewDao{
                 "  ELSE 1 END) AS avg_feedback " +
                 " FROM " + TABLE_NAME +
                 " WHERE " + COLUMN_USER_ID + " = " + userId +
-                " GROUP BY " + COLUMN_GAME_TITLE +
-                " ORDER BY avg_feedback " + order +
+                " GROUP BY " + COLUMN_GAME_TITLE;
+
+        String query = "SELECT " + COLUMN_GAME_TITLE + ", review_count, avg_feedback " +
+                "FROM (" + subquery + ") AS subquery " +
+                "WHERE avg_feedback " + (order.equals("ASC") ? ">= 3 " : "< 3 ") +
+                "ORDER BY avg_feedback " + order +
                 " LIMIT 5";
 
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
@@ -139,12 +149,11 @@ public class ReviewDao{
                 reviews.add(reviewData);
             }
         }
-
         return reviews;
     }
 
     public int getCountReviewByUser(int userId){
-        String query = "SELECT COUNT(*) FROM " + TABLE_NAME;
+        String query = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COLUMN_USER_ID + " = " + userId;
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
         int countReview = 0;
@@ -159,7 +168,7 @@ public class ReviewDao{
         return countReview;
     }
 
-    public Review loadByReviewId(int reviewId) {
+    public Review loadReviewById(int reviewId) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
@@ -175,14 +184,11 @@ public class ReviewDao{
                 String feedback = cursor.getString(3);
 
                 UserDao userDao = new UserDao(sqlLiteManager.getContext());
-                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(4)));
+                User user = userDao.loadUserById(Integer.parseInt(cursor.getString(4)));
 
                 review = new Review(id, gameTitle, reviewDescription, feedback, user);
             }
         }
-
         return review;
     }
-
-
 }

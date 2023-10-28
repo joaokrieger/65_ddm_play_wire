@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 
-import com.ddm.playwire.dao.ReviewCommentDao;
 import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.databinding.ActivityMenuBinding;
 import com.ddm.playwire.ui.fragment.FeedFragment;
@@ -34,7 +33,6 @@ public class MenuActivity extends AppCompatActivity {
         this.loadUser(userId);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-
             switch (item.getItemId()){
                 case R.id.rank:
                     replaceFragment(new RankFragment());
@@ -46,7 +44,6 @@ public class MenuActivity extends AppCompatActivity {
                     replaceFragment(new ProfileFragment());
                     break;
             }
-
             return true;
         });
     }
@@ -54,7 +51,7 @@ public class MenuActivity extends AppCompatActivity {
     private void loadUser(int userId){
         if(userId != -1){
             UserDao userDao = new UserDao(this);
-            this.user = userDao.loadByUserId(userId);
+            this.user = userDao.loadUserById(userId);
         }
     }
 

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
@@ -43,10 +42,10 @@ public class ReviewCommentDao {
 
                 int id = Integer.parseInt(cursor.getString(0));
                 ReviewDao reviewDao = new ReviewDao(sqlLiteManager.getContext());
-                Review review = reviewDao.loadByReviewId(Integer.parseInt(cursor.getString(1)));
+                Review review = reviewDao.loadReviewById(Integer.parseInt(cursor.getString(1)));
 
                 UserDao userDao = new UserDao(sqlLiteManager.getContext());
-                User user = userDao.loadByUserId(Integer.parseInt(cursor.getString(2)));
+                User user = userDao.loadUserById(Integer.parseInt(cursor.getString(2)));
 
                 String comment = cursor.getString(3);
 

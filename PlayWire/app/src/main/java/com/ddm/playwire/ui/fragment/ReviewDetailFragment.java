@@ -30,11 +30,6 @@ public class ReviewDetailFragment extends Fragment {
         this.reviewId = reviewId;
     }
 
-    public static ReviewDetailFragment newInstance() {
-        ReviewDetailFragment fragment = new ReviewDetailFragment(reviewId);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +41,7 @@ public class ReviewDetailFragment extends Fragment {
         MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_review_detail, container, false);
         reviewDao = new ReviewDao(getContext());
-        Review review = reviewDao.loadByReviewId(reviewId);
+        Review review = reviewDao.loadReviewById(reviewId);
 
         btnRemove = rootView.findViewById(R.id.btnRemove);
 

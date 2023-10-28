@@ -78,7 +78,6 @@ public class ReviewRankAdapter extends BaseAdapter {
             default:
                 feedback = "Excelente";
         }
-
         return feedback;
     }
 }

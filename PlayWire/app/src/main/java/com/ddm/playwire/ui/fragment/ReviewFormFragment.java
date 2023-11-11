@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.ddm.playwire.R;
 import com.ddm.playwire.ui.activity.MenuActivity;
-import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.model.Review;
+import com.ddm.playwire.viewmodel.ReviewViewModel;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -26,17 +28,18 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     private Spinner spFeedback;
     private Button btnRegisterReview;
     private String feedback;
+    private ReviewViewModel reviewViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        reviewViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication()).create(ReviewViewModel.class);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_review_form, container, false);
-        MenuActivity activity = (MenuActivity) getActivity();
 
         spFeedback = rootView.findViewById(R.id.spFeedback);
         @SuppressLint("ResourceType") ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.game_review_score, R.drawable.spinner_item_layout);
@@ -48,19 +51,30 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         etReviewDescription = rootView.findViewById(R.id.etReviewDescription);
         btnRegisterReview = rootView.findViewById(R.id.btnRegisterReview);
 
-        btnRegisterReview.setOnClickListener(view -> {
-            ReviewDao reviewDao = new ReviewDao(getContext());
-
-            reviewDao.insert(new Review(
-                    etGameTitle.getText().toString(),
-                    etReviewDescription.getText().toString(),
-                    feedback,
-                    activity.getSessionUser()));
-
-            activity.replaceFragment(new FeedFragment());
-        });
+        btnRegisterReview.setOnClickListener(view -> insertReview());
 
         return rootView;
+    }
+
+    private void insertReview() {
+        if(validateFormFields()) {
+            reviewViewModel.insertReview(new Review(etGameTitle.getText().toString(), etReviewDescription.getText().toString(), feedback, ((MenuActivity) getActivity()).getSessionUser()));
+            navigateToFeedFragment();
+        }
+    }
+
+    private boolean validateFormFields() {
+        if(etGameTitle.getText().toString().isEmpty()) {
+            Toast.makeText(requireActivity(), "É necessário preencher o campo Nome do Jogo!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(etReviewDescription.getText().toString().isEmpty()) {
+            Toast.makeText(requireActivity(), "É necessário preencher o campo Descrição da Análise!", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
     @Override
@@ -70,4 +84,8 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {}
+
+    private void navigateToFeedFragment(){
+        ((MenuActivity) getActivity()).replaceFragment(new FeedFragment());
+    }
 }

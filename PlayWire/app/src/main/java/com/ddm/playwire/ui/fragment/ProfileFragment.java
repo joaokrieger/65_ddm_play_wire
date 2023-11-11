@@ -38,10 +38,9 @@ public class ProfileFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        user = activity.getSessionUser();
+        user = ((MenuActivity) getActivity()).getSessionUser();
         tvUsernameProfile = rootView.findViewById(R.id.tvUsernameProfile);
         tvUsernameProfile.setText(user.getUsername());
 

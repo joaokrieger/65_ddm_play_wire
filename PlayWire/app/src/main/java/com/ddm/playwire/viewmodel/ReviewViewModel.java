@@ -58,4 +58,8 @@ public class ReviewViewModel extends AndroidViewModel {
     public void deleteReview(Review review) {
         reviewDao.delete(review);
     }
+
+    public void insertReview(Review review) {
+        reviewDao.insert(review);
+    }
 }

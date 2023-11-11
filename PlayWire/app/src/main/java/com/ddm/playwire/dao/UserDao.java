@@ -24,7 +24,7 @@ public class UserDao{
         this.sqlLiteManager = new SQLiteManager(context);
     }
 
-    public int insert(User user) {
+    public User insert(User user) {
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -34,7 +34,7 @@ public class UserDao{
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(result);
 
-        return (int) result;
+        return user;
     }
 
     public User loadUserByCredentials(String username, String password){

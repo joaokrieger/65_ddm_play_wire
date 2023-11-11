@@ -1,57 +1,64 @@
 package com.ddm.playwire.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewCommentDao;
-import com.ddm.playwire.dao.SQLiteManager;
-import com.ddm.playwire.dao.UserDao;
-import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.model.User;
-
-import java.util.List;
+import com.ddm.playwire.viewModel.LoginViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
+    private LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        SQLiteManager sqLiteManager = new SQLiteManager(this);
+        loginViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class);
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
 
         Button btnLogin = findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(view -> {
-            UserDao userDao = new UserDao(view.getContext());
-            User user = userDao.loadUserByCredentials(etUsername.getText().toString(), etPassword.getText().toString());
 
-            if(user != null){
-                Toast.makeText(view.getContext(), "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(view.getContext(), MenuActivity.class);
-                intent.putExtra("userId", user.getUserId());
-                startActivity(intent);
-            }
-            else{
-                Toast.makeText(view.getContext(), "Usuário inválido!", Toast.LENGTH_SHORT).show();
-            }
+            String username = etUsername.getText().toString();
+            String password = etPassword.getText().toString();
+            authenticateUser(loginViewModel.login(username, password));
         });
 
         Button btnRegisterUser = findViewById(R.id.btnRegisterUser);
         btnRegisterUser.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), UserFormActivity.class);
-            startActivity(intent);
+            navigateToUserFormActivity();
         });
+    }
+
+    private void authenticateUser(User user){
+        if(user != null){
+            Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
+            navigateToMenuActivity(user);
+        }
+        else{
+            Toast.makeText(this, "Usuário inválido!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void navigateToMenuActivity(User user){
+        Intent intent = new Intent(this, MenuActivity.class);
+        intent.putExtra("userId", user.getUserId());
+        startActivity(intent);
+    }
+
+    private void navigateToUserFormActivity(){
+        Intent intent = new Intent(this, UserFormActivity.class);
+        startActivity(intent);
     }
 }

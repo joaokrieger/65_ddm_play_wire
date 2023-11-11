@@ -3,6 +3,7 @@ package com.ddm.playwire.ui.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.ui.activity.MenuActivity;
 import com.ddm.playwire.ui.adapter.ReviewProfileRankAdapter;
+import com.ddm.playwire.viewmodel.ReviewViewModel;
 
 import java.util.List;
 
@@ -23,14 +24,16 @@ public class ProfileFragment extends Fragment {
     private View rootView;
     private TextView tvUsernameProfile;
     private TextView tvUserCountReview;
-    private ReviewDao reviewDao;
     private ListView lvFavouriteGame;
     private ListView lvUnfavouriteGame;
-    private ReviewProfileRankAdapter reviewRankAdapterFav, reviewRankAdapterUnfav;
+    private ReviewViewModel reviewViewModel;
+
+    private User user;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        reviewViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().getApplication()).create(ReviewViewModel.class);
     }
 
     @Override
@@ -38,32 +41,35 @@ public class ProfileFragment extends Fragment {
         MenuActivity activity = (MenuActivity) getActivity();
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        User user = activity.getSessionUser();
+        user = activity.getSessionUser();
         tvUsernameProfile = rootView.findViewById(R.id.tvUsernameProfile);
         tvUsernameProfile.setText(user.getUsername());
 
-        this.displayData(user.getUserId());
+        lvUnfavouriteGame = rootView.findViewById(R.id.lvUnfavouriteGame);
+        lvFavouriteGame = rootView.findViewById(R.id.lvFavouriteGame);
+        tvUserCountReview = rootView.findViewById(R.id.tvUserCountReview);
+
+        listProfileReviews();
 
         return rootView;
     }
 
 
-    private void displayData(int userId) {
+    private void listProfileReviews() {
+        reviewViewModel.getFavouriteGameLive(user.getUserId()).observe(requireActivity(), favouriteGames -> setFavouriteReviewAdapter(favouriteGames));
+        reviewViewModel.getUnfavouriteGameLive(user.getUserId()).observe(requireActivity(), unfavouriteGames -> setUnfavouriteReviewAdapter(unfavouriteGames));
+        reviewViewModel.getCountReviewByUserLive(user.getUserId()).observe(requireActivity(), countReview -> {
+            tvUserCountReview.setText(countReview + " Análise(s)");
+        });
+    }
 
-        reviewDao = new ReviewDao(getContext());
-
-        lvFavouriteGame = rootView.findViewById(R.id.lvFavouriteGame);
-        List<String[]> favoriteReviews = reviewDao.listFavouriteGamesByUser(userId);
-        reviewRankAdapterFav = new ReviewProfileRankAdapter(getContext(), favoriteReviews);
+    private void setFavouriteReviewAdapter(List<String[]> favouriteGames) {
+        ReviewProfileRankAdapter reviewRankAdapterFav = new ReviewProfileRankAdapter(getContext(), favouriteGames);
         lvFavouriteGame.setAdapter(reviewRankAdapterFav);
+    }
 
-        lvUnfavouriteGame = rootView.findViewById(R.id.lvUnfavouriteGame);
-        List<String[]> unfavoriteReviews = reviewDao.listUnfavouriteGamesByUser(userId);
-        reviewRankAdapterUnfav = new ReviewProfileRankAdapter(getContext(), unfavoriteReviews);
+    private void setUnfavouriteReviewAdapter(List<String[]> unfavouriteGames) {
+        ReviewProfileRankAdapter reviewRankAdapterUnfav = new ReviewProfileRankAdapter(getContext(), unfavouriteGames);
         lvUnfavouriteGame.setAdapter(reviewRankAdapterUnfav);
-
-        tvUserCountReview = rootView.findViewById(R.id.tvUserCountReview);
-        int countReview = reviewDao.getCountReviewByUser(userId);
-        tvUserCountReview.setText(countReview + " Análise(s)");
     }
 }

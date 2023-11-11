@@ -15,12 +15,12 @@ import com.ddm.playwire.ui.fragment.ProfileFragment;
 import com.ddm.playwire.R;
 import com.ddm.playwire.ui.fragment.RankFragment;
 import com.ddm.playwire.model.User;
-import com.ddm.playwire.viewModel.MenuViewModel;
+import com.ddm.playwire.viewmodel.UserViewModel;
 
 public class MenuActivity extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
-    private MenuViewModel menuViewModel;
+    private UserViewModel userViewModel;
     private User sessionUser;
 
     @Override
@@ -34,8 +34,8 @@ public class MenuActivity extends AppCompatActivity {
         replaceFragment(new FeedFragment());
 
         int userId = getIntent().getIntExtra("userId", -1);
-        menuViewModel = new ViewModelProvider(this).get(MenuViewModel.class);
-        this.sessionUser = menuViewModel.loadSessionUser(userId);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        this.sessionUser = userViewModel.loadUser(userId);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> setFragment(item));
     }

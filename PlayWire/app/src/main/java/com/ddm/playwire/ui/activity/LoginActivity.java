@@ -10,19 +10,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.ddm.playwire.R;
 import com.ddm.playwire.model.User;
-import com.ddm.playwire.viewModel.LoginViewModel;
+import com.ddm.playwire.viewmodel.UserViewModel;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword;
-    private LoginViewModel loginViewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        loginViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(LoginViewModel.class);
+        userViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
             String username = etUsername.getText().toString();
             String password = etPassword.getText().toString();
-            authenticateUser(loginViewModel.login(username, password));
+            authenticateUser(userViewModel.login(username, password));
         });
 
         Button btnRegisterUser = findViewById(R.id.btnRegisterUser);

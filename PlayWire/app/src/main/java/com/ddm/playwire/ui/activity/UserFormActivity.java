@@ -11,12 +11,12 @@ import android.widget.Toast;
 
 import com.ddm.playwire.R;
 import com.ddm.playwire.model.User;
-import com.ddm.playwire.viewModel.UserFormViewModel;
+import com.ddm.playwire.viewmodel.UserViewModel;
 
 public class UserFormActivity extends AppCompatActivity {
 
     private EditText etUsername, etPassword, etPasswordConfirm;
-    private UserFormViewModel userFormViewModel;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +25,7 @@ public class UserFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        userFormViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserFormViewModel.class);
+        userViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
@@ -39,7 +39,7 @@ public class UserFormActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
 
-                submitUser(userFormViewModel.registerUser(username, password));
+                submitUser(userViewModel.registerUser(username, password));
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragment;
+package com.ddm.playwire.view.fragment;
 
 import android.os.Bundle;
 
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.ui.activity.MenuActivity;
-import com.ddm.playwire.ui.adapter.ReviewFeedAdapter;
+import com.ddm.playwire.view.activity.MenuActivity;
+import com.ddm.playwire.view.adapter.ReviewFeedAdapter;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.viewmodel.ReviewViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;

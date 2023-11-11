@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragment;
+package com.ddm.playwire.view.fragment;
 
 import android.os.Bundle;
 
@@ -15,12 +15,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.model.User;
-import com.ddm.playwire.ui.activity.MenuActivity;
-import com.ddm.playwire.ui.adapter.ReviewCommentAdapter;
+import com.ddm.playwire.view.activity.MenuActivity;
+import com.ddm.playwire.view.adapter.ReviewCommentAdapter;
 import com.ddm.playwire.viewmodel.ReviewCommentViewModel;
 import com.ddm.playwire.viewmodel.ReviewViewModel;
 

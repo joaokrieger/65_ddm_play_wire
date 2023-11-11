@@ -8,7 +8,7 @@
     android:paddingLeft="20dp"
     android:paddingTop="50dp"
     android:paddingRight="20dp"
-    tools:context=".ui.fragment.ReviewFormFragment">
+    tools:context=".view.fragment.ReviewFormFragment">
 
     <TextView
         android:id="@+id/tvFormReview"

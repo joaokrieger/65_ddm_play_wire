@@ -17,15 +17,15 @@
         android:theme="@style/Theme.PlayWire"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activity.UserFormActivity"
+            android:name=".view.activity.UserFormActivity"
             android:exported="false"
-            android:parentActivityName=".ui.activity.LoginActivity"/>
+            android:parentActivityName=".view.activity.LoginActivity"/>
         <activity
-            android:name=".ui.activity.MenuActivity"
+            android:name=".view.activity.MenuActivity"
             android:exported="false"
-            android:parentActivityName=".ui.activity.MenuActivity"/>
+            android:parentActivityName=".view.activity.MenuActivity"/>
         <activity
-            android:name=".ui.activity.LoginActivity"
+            android:name=".view.activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

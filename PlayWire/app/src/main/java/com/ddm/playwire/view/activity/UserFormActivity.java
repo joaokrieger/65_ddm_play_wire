@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.activity;
+package com.ddm.playwire.view.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;

@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragment;
+package com.ddm.playwire.view.fragment;
 
 import android.os.Bundle;
 
@@ -13,8 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.ui.activity.MenuActivity;
-import com.ddm.playwire.dao.ReviewDao;
+import com.ddm.playwire.view.activity.MenuActivity;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.viewmodel.ReviewViewModel;
 

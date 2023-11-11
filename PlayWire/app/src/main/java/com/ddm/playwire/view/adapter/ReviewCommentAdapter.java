@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.adapter;
+package com.ddm.playwire.view.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.ReviewComment;
 
 import java.util.List;

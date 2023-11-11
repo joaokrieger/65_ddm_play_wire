@@ -1,4 +1,4 @@
-package com.ddm.playwire.ui.fragment;
+package com.ddm.playwire.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.ui.activity.MenuActivity;
+import com.ddm.playwire.view.activity.MenuActivity;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.viewmodel.ReviewViewModel;
 

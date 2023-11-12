@@ -33,6 +33,7 @@ public class UserDao{
 
         long result = sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         SQLiteManager.checkExecSql(result);
+        user.setUserId(Integer.parseInt(String.valueOf(result)));
 
         return user;
     }

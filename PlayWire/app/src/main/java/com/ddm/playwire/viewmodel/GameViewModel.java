@@ -26,7 +26,6 @@ public class GameViewModel extends AndroidViewModel {
 
             @Override
             public void onGameNamesFailed() {
-                // Você pode lidar com a falha aqui, se necessário
             }
         });
 

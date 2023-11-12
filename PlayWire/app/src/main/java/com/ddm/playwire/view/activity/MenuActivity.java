@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.ddm.playwire.databinding.ActivityMenuBinding;
 import com.ddm.playwire.view.fragment.FeedFragment;
 import com.ddm.playwire.view.fragment.ProfileFragment;
 import com.ddm.playwire.R;

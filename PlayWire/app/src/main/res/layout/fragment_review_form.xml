@@ -19,15 +19,13 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/etGameTitle"
+    <AutoCompleteTextView
+        android:id="@+id/acGameTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edit_text"
-        android:ems="10"
         android:hint="Nome do Jogo"
-        android:inputType="textPersonName"
         android:minHeight="48dp"
         android:paddingLeft="5dp"
         android:paddingTop="5dp"

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.ddm.playwire.SharedPreferenceDataSource;
+import com.ddm.playwire.data.SharedPreferenceDataSource;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.UserRepository;
 

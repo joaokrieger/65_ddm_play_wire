@@ -1,4 +1,4 @@
-package com.ddm.playwire;
+package com.ddm.playwire.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -18,17 +18,21 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewDao;
-import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.data.dao.ReviewDao;
+import com.ddm.playwire.data.dao.UserDao;
+import com.ddm.playwire.model.Game;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.repository.UserRepository;
+import com.ddm.playwire.ui.adapter.AutoCompleteGameAdapter;
 import com.ddm.playwire.ui.main.MenuActivity;
 import com.ddm.playwire.viewmodel.game.GameViewModel;
 import com.ddm.playwire.viewmodel.review.ReviewViewModel;
 import com.ddm.playwire.viewmodel.review.ReviewViewModelFactory;
 import com.ddm.playwire.viewmodel.user.UserViewModel;
 import com.ddm.playwire.viewmodel.user.UserViewModelFactory;
+
+import java.util.List;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
@@ -37,7 +41,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     private GameViewModel gameViewModel;
     private UserViewModel userViewModel;
     private String feedback;
-    private ArrayAdapter<String> autoCompleteAdapter;
+    private AutoCompleteGameAdapter autoCompleteAdapter;
     private User user;
 
     @Override
@@ -64,12 +68,21 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         return rootView;
     }
 
-    private void updateAutoComplete(String[] games) {
-        if (games != null) {
-            autoCompleteAdapter = new ArrayAdapter<String>(requireActivity(), android.R.layout.simple_dropdown_item_1line, games);
-            AutoCompleteTextView acGameTitle = rootView.findViewById(R.id.acGameTitle);
-            acGameTitle.setAdapter(autoCompleteAdapter);
+    private void updateAutoComplete(List<Game> gameList) {
+        if (autoCompleteAdapter == null) {
+            setAutoCompleteAdapter(gameList);
         }
+        else{
+            autoCompleteAdapter.getGameListFull().clear();
+            autoCompleteAdapter.addAll(gameList);
+            autoCompleteAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void setAutoCompleteAdapter(List<Game>  gameList) {
+        autoCompleteAdapter = new AutoCompleteGameAdapter(getActivity().getApplicationContext(), gameList);
+        AutoCompleteTextView acGameTitle = rootView.findViewById(R.id.acGameTitle);
+        acGameTitle.setAdapter(autoCompleteAdapter);
     }
 
     private void initComponents() {
@@ -100,7 +113,6 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
             navigateToFeedFragment();
         }
     }
-
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {

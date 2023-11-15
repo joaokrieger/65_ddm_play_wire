@@ -1,8 +1,10 @@
 package com.ddm.playwire.repository;
 
+import com.ddm.playwire.model.Game;
+
+import java.util.List;
+
 public interface GameRepository {
-    void onGameNamesLoaded(String[] gameNames);
-    void onGameNamesFailed();
+    void onGameLoaded(List<Game> gameList);
+    void onGameFailed();
 }
-
-

@@ -1,4 +1,4 @@
-package com.ddm.playwire.dao;
+package com.ddm.playwire.data.dao;
 
 import android.content.ContentValues;
 import android.content.Context;

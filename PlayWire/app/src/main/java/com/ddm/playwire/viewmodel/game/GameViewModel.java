@@ -7,29 +7,32 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.ddm.playwire.model.Game;
+import com.ddm.playwire.network.GameRetrofit;
 import com.ddm.playwire.repository.GameRepository;
-import com.ddm.playwire.network.GameRetrofitInitializer;
+
+import java.util.List;
 
 public class GameViewModel extends AndroidViewModel {
 
-    private MutableLiveData<String[]> gameNamesLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Game>> games = new MutableLiveData<>();
 
     public GameViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public LiveData<String[]> getAllGames() {
-        GameRetrofitInitializer.getGameNames(new GameRepository() {
+    public LiveData<List<Game>> getAllGames() {
+        GameRetrofit.getGameNames(new GameRepository() {
             @Override
-            public void onGameNamesLoaded(String[] gameNames) {
-                gameNamesLiveData.setValue(gameNames);
+            public void onGameLoaded(List<Game> gameNames) {
+                games.setValue(gameNames);
             }
 
             @Override
-            public void onGameNamesFailed() {
+            public void onGameFailed() {
             }
         });
 
-        return gameNamesLiveData;
+        return games;
     }
 }

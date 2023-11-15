@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.data.dao.UserDao;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.UserRepository;
 import com.ddm.playwire.ui.main.MenuActivity;

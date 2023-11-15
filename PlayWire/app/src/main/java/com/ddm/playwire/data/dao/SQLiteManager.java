@@ -1,4 +1,4 @@
-package com.ddm.playwire.dao;
+package com.ddm.playwire.data.dao;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

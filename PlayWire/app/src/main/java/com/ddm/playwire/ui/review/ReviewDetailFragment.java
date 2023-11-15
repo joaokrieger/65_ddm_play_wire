@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewDao;
-import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.data.dao.ReviewDao;
+import com.ddm.playwire.data.dao.UserDao;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.repository.UserRepository;

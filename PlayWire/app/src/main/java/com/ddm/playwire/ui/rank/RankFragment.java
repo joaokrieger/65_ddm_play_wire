@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.dao.ReviewDao;
+import com.ddm.playwire.data.dao.ReviewDao;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.ui.adapter.ReviewRankAdapter;
 import com.ddm.playwire.viewmodel.review.ReviewViewModel;

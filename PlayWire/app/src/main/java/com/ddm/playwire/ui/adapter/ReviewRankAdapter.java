@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.adapter;
+package com.ddm.playwire.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,6 +19,10 @@ public class ReviewRankAdapter extends BaseAdapter {
     public ReviewRankAdapter(Context context, List<String[]> reviewRank) {
         this.context = context;
         this.reviewRank = reviewRank;
+    }
+
+    public List<String[]> getReviewRank() {
+        return reviewRank;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.ddm.playwire.viewmodel;
+package com.ddm.playwire.viewmodel.reviewcomment;
 
 import android.app.Application;
 

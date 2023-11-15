@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.fragment;
+package com.ddm.playwire.ui.reviewcomment;
 
 import android.os.Bundle;
 
@@ -18,10 +18,9 @@ import com.ddm.playwire.R;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.model.User;
-import com.ddm.playwire.view.activity.MenuActivity;
-import com.ddm.playwire.view.adapter.ReviewCommentAdapter;
-import com.ddm.playwire.viewmodel.ReviewCommentViewModel;
-import com.ddm.playwire.viewmodel.ReviewViewModel;
+import com.ddm.playwire.ui.adapter.ReviewCommentAdapter;
+import com.ddm.playwire.viewmodel.reviewcomment.ReviewCommentViewModel;
+import com.ddm.playwire.viewmodel.review.ReviewViewModel;
 
 import java.util.List;
 

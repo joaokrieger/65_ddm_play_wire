@@ -1,4 +1,4 @@
-package com.ddm.playwire.viewmodel;
+package com.ddm.playwire.viewmodel.review;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

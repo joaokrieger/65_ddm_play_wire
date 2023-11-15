@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.adapter;
+package com.ddm.playwire.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

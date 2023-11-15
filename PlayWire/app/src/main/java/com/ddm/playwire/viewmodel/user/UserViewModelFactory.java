@@ -1,4 +1,4 @@
-package com.ddm.playwire.viewmodel;
+package com.ddm.playwire.viewmodel.user;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;

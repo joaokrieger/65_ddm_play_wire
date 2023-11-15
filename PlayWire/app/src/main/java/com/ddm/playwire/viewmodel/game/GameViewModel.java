@@ -1,4 +1,4 @@
-package com.ddm.playwire.viewmodel;
+package com.ddm.playwire.viewmodel.game;
 
 import android.app.Application;
 

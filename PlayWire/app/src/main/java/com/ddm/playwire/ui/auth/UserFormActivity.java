@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.activity;
+package com.ddm.playwire.ui.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -13,8 +13,9 @@ import com.ddm.playwire.R;
 import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.UserRepository;
-import com.ddm.playwire.viewmodel.UserViewModel;
-import com.ddm.playwire.viewmodel.UserViewModelFactory;
+import com.ddm.playwire.ui.main.MenuActivity;
+import com.ddm.playwire.viewmodel.user.UserViewModel;
+import com.ddm.playwire.viewmodel.user.UserViewModelFactory;
 
 public class UserFormActivity extends AppCompatActivity {
 

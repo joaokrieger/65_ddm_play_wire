@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.fragment;
+package com.ddm.playwire.ui.review;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -18,11 +18,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
-import com.ddm.playwire.repository.GameRepository;
-import com.ddm.playwire.view.activity.MenuActivity;
-import com.ddm.playwire.model.Review;
-import com.ddm.playwire.viewmodel.GameViewModel;
-import com.ddm.playwire.viewmodel.ReviewViewModel;
+import com.ddm.playwire.ui.main.MenuActivity;
+import com.ddm.playwire.viewmodel.game.GameViewModel;
+import com.ddm.playwire.viewmodel.review.ReviewViewModel;
 
 public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 

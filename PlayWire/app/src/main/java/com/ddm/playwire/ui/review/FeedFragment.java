@@ -1,9 +1,8 @@
-package com.ddm.playwire.view.fragment;
+package com.ddm.playwire.ui.review;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
@@ -14,11 +13,11 @@ import android.widget.ListView;
 import com.ddm.playwire.R;
 import com.ddm.playwire.dao.ReviewDao;
 import com.ddm.playwire.repository.ReviewRepository;
-import com.ddm.playwire.view.activity.MenuActivity;
-import com.ddm.playwire.view.adapter.ReviewFeedAdapter;
+import com.ddm.playwire.ui.main.MenuActivity;
+import com.ddm.playwire.ui.adapter.ReviewFeedAdapter;
 import com.ddm.playwire.model.Review;
-import com.ddm.playwire.viewmodel.ReviewViewModel;
-import com.ddm.playwire.viewmodel.ReviewViewModelFactory;
+import com.ddm.playwire.viewmodel.review.ReviewViewModel;
+import com.ddm.playwire.viewmodel.review.ReviewViewModelFactory;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;

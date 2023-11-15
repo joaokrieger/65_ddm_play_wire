@@ -1,4 +1,4 @@
-package com.ddm.playwire.view.fragment;
+package com.ddm.playwire.ui.profile;
 
 import android.os.Bundle;
 
@@ -17,11 +17,11 @@ import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.repository.UserRepository;
-import com.ddm.playwire.view.adapter.ReviewProfileRankAdapter;
-import com.ddm.playwire.viewmodel.ReviewViewModel;
-import com.ddm.playwire.viewmodel.ReviewViewModelFactory;
-import com.ddm.playwire.viewmodel.UserViewModel;
-import com.ddm.playwire.viewmodel.UserViewModelFactory;
+import com.ddm.playwire.ui.adapter.ReviewProfileRankAdapter;
+import com.ddm.playwire.viewmodel.review.ReviewViewModel;
+import com.ddm.playwire.viewmodel.review.ReviewViewModelFactory;
+import com.ddm.playwire.viewmodel.user.UserViewModel;
+import com.ddm.playwire.viewmodel.user.UserViewModelFactory;
 
 import java.util.List;
 

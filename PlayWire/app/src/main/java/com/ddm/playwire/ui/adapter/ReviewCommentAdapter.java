@@ -22,6 +22,10 @@ public class ReviewCommentAdapter extends BaseAdapter {
         this.reviewComments = reviewComments;
     }
 
+    public List<ReviewComment> getReviewComments() {
+        return reviewComments;
+    }
+
     @Override
     public int getCount() {
         return reviewComments.size();

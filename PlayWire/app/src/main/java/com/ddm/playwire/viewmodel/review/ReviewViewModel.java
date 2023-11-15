@@ -13,48 +13,38 @@ import java.util.List;
 public class ReviewViewModel extends ViewModel {
 
     private ReviewRepository reviewRepository;
-    private MutableLiveData<Review> currentReviewLiveData;
-    private MutableLiveData<List<Review>> reviewsLiveData;
-    private MutableLiveData<List<String[]>> favouriteReviewsLiveData;
-    private MutableLiveData<List<String[]>> unfavouriteReviewsLiveData;
-    private MutableLiveData<List<String[]>> rankReviewLiveData;
-    private MutableLiveData<Integer> userReviewCount;
+    private MutableLiveData<Review> currentReviewLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Review>> reviewsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<String[]>> favouriteReviewsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<String[]>> unfavouriteReviewsLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<String[]>> rankReviewLiveData = new MutableLiveData<>();
+    private MutableLiveData<Integer> userReviewCount = new MutableLiveData<>();
 
     public ReviewViewModel(ReviewRepository reviewRepository) {
         this.reviewRepository = reviewRepository;
     }
 
     public LiveData<List<Review>> getAllReviewLive() {
-        if(reviewsLiveData == null)
-            reviewsLiveData = new MutableLiveData<>();
         loadAllReviews();
         return reviewsLiveData;
     }
 
     public LiveData<List<String[]>> getFavouriteReviewsLive(User user){
-        if(favouriteReviewsLiveData == null)
-            favouriteReviewsLiveData = new MutableLiveData<>();
         loadFavouriteGameReview(user.getUserId());
         return favouriteReviewsLiveData;
     }
 
     public LiveData<List<String[]>> getUnfavouriteReviewsLive(User user){
-        if(unfavouriteReviewsLiveData == null)
-            unfavouriteReviewsLiveData = new MutableLiveData<>();
         loadUnfavouriteGameReview(user.getUserId());
         return unfavouriteReviewsLiveData;
     }
 
     public LiveData<Integer> getCountReviewByUserLive(User user) {
-        if(userReviewCount == null)
-            userReviewCount = new MutableLiveData<>();
         loadCountReviewByUser(user.getUserId());
         return userReviewCount;
     }
 
     public LiveData<List<String[]>> getGameRankLive(){
-        if(rankReviewLiveData == null)
-            rankReviewLiveData = new MutableLiveData<>();
         loadRankReview();
         return rankReviewLiveData;
     }
@@ -99,8 +89,6 @@ public class ReviewViewModel extends ViewModel {
     }
 
     public LiveData<Review> getReview(int reviewId) {
-        if(currentReviewLiveData == null)
-            currentReviewLiveData = new MutableLiveData<>();
         loadReview(reviewId);
         return currentReviewLiveData;
     }

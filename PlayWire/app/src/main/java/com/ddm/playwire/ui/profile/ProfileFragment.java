@@ -69,19 +69,25 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateUnfavoriteListView(List<String[]> unfavoriteReviews) {
-        if(reviewRankAdapterUnfav == null)
+        if(reviewRankAdapterUnfav == null) {
             setUnfavouriteReviewAdapter(unfavoriteReviews);
-        reviewRankAdapterUnfav.getReviewRank().clear();
-        reviewRankAdapterUnfav.getReviewRank().addAll(unfavoriteReviews);
-        reviewRankAdapterUnfav.notifyDataSetChanged();
+        }
+        else {
+            reviewRankAdapterUnfav.getReviewRank().clear();
+            reviewRankAdapterUnfav.getReviewRank().addAll(unfavoriteReviews);
+            reviewRankAdapterUnfav.notifyDataSetChanged();
+        }
     }
 
     private void updateFavoriteListView(List<String[]> favoriteReviews) {
-        if(reviewRankAdapterFav == null)
+        if(reviewRankAdapterFav == null) {
             setFavouriteReviewAdapter(favoriteReviews);
-        reviewRankAdapterFav.getReviewRank().clear();
-        reviewRankAdapterFav.getReviewRank().addAll(favoriteReviews);
-        reviewRankAdapterFav.notifyDataSetChanged();
+        }
+        else {
+            reviewRankAdapterFav.getReviewRank().clear();
+            reviewRankAdapterFav.getReviewRank().addAll(favoriteReviews);
+            reviewRankAdapterFav.notifyDataSetChanged();
+        }
     }
 
     private void setFavouriteReviewAdapter(List<String[]> favouriteGames) {

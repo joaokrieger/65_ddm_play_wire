@@ -40,11 +40,14 @@ public class RankFragment extends Fragment {
     }
 
     private void updateListView(List<String[]> rankGames) {
-        if(reviewRankAdapter == null)
+        if(reviewRankAdapter == null) {
             setReviewRankAdapter(rankGames);
-        reviewRankAdapter.getReviewRank().clear();
-        reviewRankAdapter.getReviewRank().addAll(rankGames);
-        reviewRankAdapter.notifyDataSetChanged();
+        }
+        else {
+            reviewRankAdapter.getReviewRank().clear();
+            reviewRankAdapter.getReviewRank().addAll(rankGames);
+            reviewRankAdapter.notifyDataSetChanged();
+        }
     }
 
     private void setReviewRankAdapter(List<String[]> rankGames) {

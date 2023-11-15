@@ -10,11 +10,12 @@ import androidx.annotation.Nullable;
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.ReviewComment;
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.ReviewCommentRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewCommentDao {
+public class ReviewCommentDao implements ReviewCommentRepository {
 
     private final SQLiteManager sqlLiteManager;
 
@@ -29,7 +30,8 @@ public class ReviewCommentDao {
         this.sqlLiteManager = new SQLiteManager(context);
     }
 
-    public List<ReviewComment> listAllByReviewId(int reviewId){
+    @Override
+    public List<ReviewComment> listAllReviewCommentsByReviewId(int reviewId){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_REVIEW + " = " + reviewId + " ORDER BY 1 DESC";
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
@@ -57,7 +59,8 @@ public class ReviewCommentDao {
         return reviewComments;
     }
 
-    public void insert(ReviewComment reviewComment){
+    @Override
+    public void insertReviewComment(ReviewComment reviewComment){
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 

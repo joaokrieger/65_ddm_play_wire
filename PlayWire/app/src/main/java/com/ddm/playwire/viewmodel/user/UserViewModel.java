@@ -10,7 +10,7 @@ import com.ddm.playwire.repository.UserRepository;
 
 public class UserViewModel extends ViewModel {
 
-    private MutableLiveData<User> currentUserLiveData;
+    private MutableLiveData<User> currentUserLiveData = new MutableLiveData<>();;
     private UserRepository userRepository;
 
     public UserViewModel(UserRepository userRepository) {
@@ -32,10 +32,7 @@ public class UserViewModel extends ViewModel {
     }
 
     public LiveData<User> getCurrentUserLiveData() {
-        if(currentUserLiveData == null){
-            currentUserLiveData = new MutableLiveData<>();
-            loadSessionUser();
-        }
+        loadSessionUser();
         return currentUserLiveData;
     }
 

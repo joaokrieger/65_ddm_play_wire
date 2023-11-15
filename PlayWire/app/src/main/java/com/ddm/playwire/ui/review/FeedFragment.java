@@ -46,11 +46,14 @@ public class FeedFragment extends Fragment {
     }
 
     private void updateListView(List<Review> reviews) {
-        if(reviewFeedAdapter == null)
+        if(reviewFeedAdapter == null) {
             setReviewFeedAdapter(reviews);
-        reviewFeedAdapter.getReviews().clear();
-        reviewFeedAdapter.getReviews().addAll(reviews);
-        reviewFeedAdapter.notifyDataSetChanged();
+        }
+        else {
+            reviewFeedAdapter.getReviews().clear();
+            reviewFeedAdapter.getReviews().addAll(reviews);
+            reviewFeedAdapter.notifyDataSetChanged();
+        }
     }
 
     private void initComponents() {

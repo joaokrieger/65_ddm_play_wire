@@ -24,6 +24,10 @@ public class UserViewModel extends ViewModel {
         }
     }
 
+    public void logout() {
+        endSessionUser();
+    }
+
     public void registerUser(String username, String password) {
         User newUser = userRepository.insertUser(new User(username, password));
         if(newUser != null) {
@@ -45,5 +49,10 @@ public class UserViewModel extends ViewModel {
     private void initSessionUser(User user){
         SharedPreferenceDataSource.getInstance().setSessionUserId(user.getUserId());
         loadSessionUser();
+    }
+
+    private void endSessionUser(){
+        SharedPreferenceDataSource.getInstance().unsetSessionUserId();
+        this.currentUserLiveData.setValue(null);
     }
 }

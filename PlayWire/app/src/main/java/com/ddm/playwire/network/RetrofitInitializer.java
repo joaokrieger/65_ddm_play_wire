@@ -1,17 +1,9 @@
 package com.ddm.playwire.network;
 
-import com.ddm.playwire.model.Game;
-import com.ddm.playwire.repository.GameRepository;
 import com.ddm.playwire.services.GameApiService;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 

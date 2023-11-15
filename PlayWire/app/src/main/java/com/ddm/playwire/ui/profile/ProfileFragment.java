@@ -1,5 +1,6 @@
 package com.ddm.playwire.ui.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,8 @@ import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.repository.UserRepository;
 import com.ddm.playwire.ui.adapter.ReviewProfileRankAdapter;
+import com.ddm.playwire.ui.auth.LoginActivity;
+import com.ddm.playwire.ui.main.MenuActivity;
 import com.ddm.playwire.viewmodel.review.ReviewViewModel;
 import com.ddm.playwire.viewmodel.review.ReviewViewModelFactory;
 import com.ddm.playwire.viewmodel.user.UserViewModel;
@@ -66,6 +70,14 @@ public class ProfileFragment extends Fragment {
     private void initComponents() {
         TextView tvUsernameProfile = rootView.findViewById(R.id.tvUsernameProfile);
         tvUsernameProfile.setText(user.getUsername());
+
+        Button btnLogout = rootView.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(v -> logout());
+    }
+
+    private void logout() {
+        userViewModel.logout();
+        navigateToLoginActivity();
     }
 
     private void updateUnfavoriteListView(List<String[]> unfavoriteReviews) {
@@ -100,5 +112,10 @@ public class ProfileFragment extends Fragment {
         ListView lvUnfavouriteGame = rootView.findViewById(R.id.lvUnfavouriteGame);
         reviewRankAdapterUnfav = new ReviewProfileRankAdapter(getContext(), unfavouriteGames);
         lvUnfavouriteGame.setAdapter(reviewRankAdapterUnfav);
+    }
+
+    private void navigateToLoginActivity() {
+        Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
     }
 }

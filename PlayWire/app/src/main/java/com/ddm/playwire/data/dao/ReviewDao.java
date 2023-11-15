@@ -181,7 +181,7 @@ public class ReviewDao implements ReviewRepository {
                 "FROM (" + subquery + ") AS subquery " +
                 "WHERE avg_feedback " + (order.equals("ASC") ? ">= 3 " : "< 3 ") +
                 "ORDER BY avg_feedback " + order +
-                " LIMIT 5";
+                " LIMIT 3";
 
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 

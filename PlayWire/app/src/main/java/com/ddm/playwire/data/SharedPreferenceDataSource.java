@@ -29,4 +29,9 @@ public class SharedPreferenceDataSource {
     public int getSessionUserId(){
         return sharedPreferences.getInt("userId", -1);
     }
+
+    public void unsetSessionUserId(){
+        editor.remove("userId");
+        editor.apply();
+    }
 }

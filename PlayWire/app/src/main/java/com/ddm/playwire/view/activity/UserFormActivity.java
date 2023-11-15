@@ -10,70 +10,63 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ddm.playwire.R;
+import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.UserRepository;
 import com.ddm.playwire.viewmodel.UserViewModel;
+import com.ddm.playwire.viewmodel.UserViewModelFactory;
 
 public class UserFormActivity extends AppCompatActivity {
 
-    private EditText etUsername, etPassword, etPasswordConfirm;
     private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_form);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        userViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
+        UserRepository userRepository = new UserDao(getApplicationContext());
+        userViewModel = new ViewModelProvider(this, new UserViewModelFactory(userRepository)).get(UserViewModel.class);
+        userViewModel.getCurrentUserLiveData().observe(this, user -> updateUi(user));
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
-        etPasswordConfirm = findViewById(R.id.etPassword);
-
-        Button btnRegisterUser = findViewById(R.id.btnRegisterUser);
-        btnRegisterUser.setOnClickListener(view -> {
-
-            if(validateFormFields()) {
-
-                String username = etUsername.getText().toString();
-                String password = etPassword.getText().toString();
-
-                submitUser(userViewModel.registerUser(username, password));
-            }
-        });
+        initComponents();
     }
 
-    private boolean validateFormFields() {
+    private void initComponents() {
+        Button btnRegisterUser = findViewById(R.id.btnRegisterUser);
+        btnRegisterUser.setOnClickListener(v -> submitUser());
+    }
+
+    private void submitUser() {
+
+        EditText etUsername = findViewById(R.id.etUsername);
+        EditText etPassword = findViewById(R.id.etPassword);
+        EditText etPasswordConfirm = findViewById(R.id.etPassword);
+
         if(etUsername.getText().toString().isEmpty()) {
             Toast.makeText(this, "O campo Username é de preenchimento obrigatório!", Toast.LENGTH_SHORT).show();
-            return false;
         }
         else if(etPassword.getText().toString().isEmpty()) {
             Toast.makeText(this, "O campo Senha é de preenchimento obrigatório!", Toast.LENGTH_SHORT).show();
-            return false;
         }
         else if(!etPassword.getText().toString().equals(etPasswordConfirm.getText().toString())){
             Toast.makeText(this, "A senha e a confirmação de senha não correspondem!", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
-        return true;
-    }
-
-    private void submitUser(User user) {
-        if(user != null){
-            Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
-            navigateToMenuActivity(user);
         }
         else{
-            Toast.makeText(this, "Usuário inválido!", Toast.LENGTH_SHORT).show();
+            userViewModel.registerUser(etUsername.getText().toString(), etPassword.getText().toString());
         }
     }
 
-    private void navigateToMenuActivity(User user) {
+    private void navigateToMenuActivity() {
         Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("userId", user.getUserId());
         startActivity(intent);
+    }
+
+    private void updateUi(User user) {
+        if(user != null){
+            Toast.makeText(this, "Bem vindo " + user.getUsername() + "!", Toast.LENGTH_SHORT).show();
+            navigateToMenuActivity();
+        }
     }
 }

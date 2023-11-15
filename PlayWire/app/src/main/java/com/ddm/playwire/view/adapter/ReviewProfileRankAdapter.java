@@ -23,6 +23,10 @@ public class ReviewProfileRankAdapter extends BaseAdapter {
         this.reviewRank = reviewRank;
     }
 
+    public List<String[]> getReviewRank() {
+        return reviewRank;
+    }
+
     @Override
     public int getCount() {
         return reviewRank.size();

@@ -57,7 +57,7 @@ public class ReviewCommentFragment extends Fragment {
         etReviewComment = rootView.findViewById(R.id.etReviewComment);
         lvReviewComments = rootView.findViewById(R.id.lvReviewComments);
         btnComment = rootView.findViewById(R.id.btnComment);
-
+/*
         Review review = reviewViewModel.loadReview(reviewId);
         tvReviewCommentTitle.setText("Comentários Análise N° " + review.getReviewId() + " - " + review.getUser().getUsername());
 
@@ -65,6 +65,8 @@ public class ReviewCommentFragment extends Fragment {
 
         btnComment.setOnClickListener(view -> insertReviewComment(review, ((MenuActivity) getActivity()).getSessionUser()));
 
+
+ */
         return rootView;
     }
 

@@ -74,10 +74,13 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
     }
 
     private void insertReview() {
+        /*
         if(validateFormFields()) {
             reviewViewModel.insertReview(new Review(acGameTitle.getText().toString(), etReviewDescription.getText().toString(), feedback, ((MenuActivity) getActivity()).getSessionUser()));
             navigateToFeedFragment();
         }
+
+         */
     }
 
     private boolean validateFormFields() {

@@ -4,44 +4,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
 import android.view.MenuItem;
-
 import com.ddm.playwire.databinding.ActivityMenuBinding;
 import com.ddm.playwire.view.fragment.FeedFragment;
 import com.ddm.playwire.view.fragment.ProfileFragment;
 import com.ddm.playwire.R;
 import com.ddm.playwire.view.fragment.RankFragment;
-import com.ddm.playwire.model.User;
-import com.ddm.playwire.viewmodel.UserViewModel;
 
 public class MenuActivity extends AppCompatActivity {
 
     private ActivityMenuBinding binding;
-    private UserViewModel userViewModel;
-    private User sessionUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMenuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         getSupportActionBar().hide();
 
-        replaceFragment(new FeedFragment());
-
-        int userId = getIntent().getIntExtra("userId", -1);
-        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        this.sessionUser = userViewModel.loadUser(userId);
-
         binding.bottomNavigationView.setOnItemSelectedListener(item -> setFragment(item));
-    }
 
-    public User getSessionUser(){
-        return sessionUser;
+        replaceFragment(new FeedFragment());
     }
 
     private boolean setFragment(MenuItem item){
@@ -56,7 +40,6 @@ public class MenuActivity extends AppCompatActivity {
                 replaceFragment(new ProfileFragment());
                 return true;
         }
-
         return false;
     }
 

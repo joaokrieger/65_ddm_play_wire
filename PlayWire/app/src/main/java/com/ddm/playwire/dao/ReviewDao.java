@@ -9,11 +9,12 @@ import androidx.annotation.Nullable;
 
 import com.ddm.playwire.model.Review;
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.ReviewRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewDao{
+public class ReviewDao implements ReviewRepository {
 
     private final SQLiteManager sqlLiteManager;
 
@@ -29,7 +30,8 @@ public class ReviewDao{
         this.sqlLiteManager = new SQLiteManager(context);
     }
 
-    public void insert(Review review){
+    @Override
+    public void insertReview(Review review){
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -42,7 +44,8 @@ public class ReviewDao{
         SQLiteManager.checkExecSql(result);
     }
 
-    public void delete(Review review) {
+    @Override
+    public void deleteReview(Review review) {
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         String query = "_id = ?";
         String[] whereArgs = { String.valueOf(review.getReviewId()) };
@@ -51,7 +54,8 @@ public class ReviewDao{
         SQLiteManager.checkExecSql(result);
     }
 
-    public List<Review> listAll(){
+    @Override
+    public List<Review> listAllReviews(){
         String query = "SELECT * FROM " + TABLE_NAME + " ORDER BY 1 DESC";
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
 
@@ -76,7 +80,50 @@ public class ReviewDao{
         return reviews;
     }
 
-    public List<String[]> listRank(){
+    @Override
+    public int getCountReviewByUser(int userId){
+        String query = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COLUMN_USER_ID + " = " + userId;
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
+
+        int countReview = 0;
+
+        if(sqLiteDatabase != null) {
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while (cursor.moveToNext()) {
+                countReview = Integer.parseInt(cursor.getString(0));
+            }
+        }
+
+        return countReview;
+    }
+
+    @Override
+    public Review loadReviewById(int reviewId) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
+        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
+
+        Review review = null;
+
+        if(sqLiteDatabase != null){
+            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
+            while(cursor.moveToNext()){
+
+                int id = Integer.parseInt(cursor.getString(0));
+                String gameTitle = cursor.getString(1);
+                String reviewDescription = cursor.getString(2);
+                String feedback = cursor.getString(3);
+
+                UserDao userDao = new UserDao(sqlLiteManager.getContext());
+                User user = userDao.loadUserById(Integer.parseInt(cursor.getString(4)));
+
+                review = new Review(id, gameTitle, reviewDescription, feedback, user);
+            }
+        }
+        return review;
+    }
+
+    @Override
+    public List<String[]> listReviewRank(){
 
         String query = "SELECT " + COLUMN_GAME_TITLE + ", COUNT(*) AS review_count, AVG(CASE " +
                 "  WHEN " + COLUMN_FEEDBACK + " = 'Excelente' THEN 5 " +
@@ -108,15 +155,17 @@ public class ReviewDao{
         return reviews;
     }
 
+    @Override
     public List<String[]> listFavouriteGamesByUser(int userId){
-        return this.listRankByUser(userId,"ASC");
+        return this.listReviewRankByUser(userId,"ASC");
     }
 
+    @Override
     public List<String[]> listUnfavouriteGamesByUser(int userId){
-        return this.listRankByUser(userId,"DESC");
+        return this.listReviewRankByUser(userId,"DESC");
     }
 
-    private List<String[]> listRankByUser(int userId, String order){
+    private List<String[]> listReviewRankByUser(int userId, String order){
 
         String subquery = "SELECT " + COLUMN_GAME_TITLE + ", COUNT(*) AS review_count, AVG(CASE " +
                 "  WHEN " + COLUMN_FEEDBACK + " = 'Excelente' THEN 5 " +
@@ -150,45 +199,5 @@ public class ReviewDao{
             }
         }
         return reviews;
-    }
-
-    public int getCountReviewByUser(int userId){
-        String query = "SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE " + COLUMN_USER_ID + " = " + userId;
-        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
-
-        int countReview = 0;
-
-        if(sqLiteDatabase != null) {
-            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-            while (cursor.moveToNext()) {
-                countReview = Integer.parseInt(cursor.getString(0));
-            }
-        }
-
-        return countReview;
-    }
-
-    public Review loadReviewById(int reviewId) {
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = " + reviewId;
-        SQLiteDatabase sqLiteDatabase = sqlLiteManager.getReadableDatabase();
-
-        Review review = null;
-
-        if(sqLiteDatabase != null){
-            Cursor cursor = sqLiteDatabase.rawQuery(query, null);
-            while(cursor.moveToNext()){
-
-                int id = Integer.parseInt(cursor.getString(0));
-                String gameTitle = cursor.getString(1);
-                String reviewDescription = cursor.getString(2);
-                String feedback = cursor.getString(3);
-
-                UserDao userDao = new UserDao(sqlLiteManager.getContext());
-                User user = userDao.loadUserById(Integer.parseInt(cursor.getString(4)));
-
-                review = new Review(id, gameTitle, reviewDescription, feedback, user);
-            }
-        }
-        return review;
     }
 }

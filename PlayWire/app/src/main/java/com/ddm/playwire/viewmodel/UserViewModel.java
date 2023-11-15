@@ -1,34 +1,52 @@
 package com.ddm.playwire.viewmodel;
 
-import android.app.Application;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
-
-import com.ddm.playwire.dao.UserDao;
+import com.ddm.playwire.SharedPreferenceDataSource;
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.UserRepository;
 
-public class UserViewModel extends AndroidViewModel {
+public class UserViewModel extends ViewModel {
 
-    private UserDao userDao;
+    private MutableLiveData<User> currentUserLiveData;
+    private UserRepository userRepository;
 
-    public UserViewModel(@NonNull Application application) {
-        super(application);
-        userDao = new UserDao(application);
+    public UserViewModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public User login(String username, String password) {
-        User user = userDao.loadUserByCredentials(username, password);
-        return user;
+    public void login(String username, String password) {
+        User currentUser = userRepository.loadUserByCredentials(username, password);
+        if(currentUser != null){
+            initSessionUser(currentUser);
+        }
     }
 
-    public User registerUser(String username, String password) {
-        User user = userDao.insert(new User(username, password));
-        return user;
+    public void registerUser(String username, String password) {
+        User newUser = userRepository.insertUser(new User(username, password));
+        if(newUser != null) {
+            initSessionUser(newUser);
+        }
     }
 
-    public User loadUser(int userId) {
-        User user = userDao.loadUserById(userId);
-        return user;
+    public LiveData<User> getCurrentUserLiveData() {
+        if(currentUserLiveData == null){
+            currentUserLiveData = new MutableLiveData<>();
+            loadSessionUser();
+        }
+        return currentUserLiveData;
+    }
+
+    private void loadSessionUser() {
+        User user = userRepository.loadUserById(SharedPreferenceDataSource.getInstance().getSessionUserId());
+        if(user != null)
+            this.currentUserLiveData.setValue(user);
+    }
+
+    private void initSessionUser(User user){
+        SharedPreferenceDataSource.getInstance().setSessionUserId(user.getUserId());
+        loadSessionUser();
     }
 }

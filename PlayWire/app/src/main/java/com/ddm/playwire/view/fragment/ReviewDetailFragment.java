@@ -58,7 +58,7 @@ public class ReviewDetailFragment extends Fragment {
     }
 
     private void loadReviewData() {
-
+/*
         Review review = reviewViewModel.loadReview(reviewId);
         tvReviewIdentifier.setText("Análise N°" + review.getReviewId() + " - " + review.getUser().getUsername());
         etGameTitlePreview.setText(review.getGameTitle());
@@ -66,13 +66,18 @@ public class ReviewDetailFragment extends Fragment {
         etFeedbackPreview.setText(review.getFeedback());
 
         setUserPermission(review);
+
+ */
     }
 
     private void setUserPermission(Review review) {
+        /*
         if(review.getUser().getUserId() != ((MenuActivity) getActivity()).getSessionUser().getUserId())
             btnRemove.setVisibility(View.INVISIBLE);
         else
             btnRemove.setOnClickListener(view -> deleteReview(review));
+
+         */
     }
 
     private void deleteReview(Review review) {

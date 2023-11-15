@@ -22,6 +22,10 @@ public class ReviewFeedAdapter extends BaseAdapter {
         this.reviews = reviews;
     }
 
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
     @Override
     public int getCount() {
         return reviews.size();

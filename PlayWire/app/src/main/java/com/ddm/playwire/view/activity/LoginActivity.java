@@ -9,12 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.ddm.playwire.R;
+import com.ddm.playwire.SharedPreferenceDataSource;
+import com.ddm.playwire.dao.UserDao;
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.UserRepository;
 import com.ddm.playwire.viewmodel.UserViewModel;
+import com.ddm.playwire.viewmodel.UserViewModelFactory;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText etUsername, etPassword;
     private UserViewModel userViewModel;
 
     @Override
@@ -22,38 +25,41 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        userViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(UserViewModel.class);
+        SharedPreferenceDataSource.getInstance().init(getApplicationContext());
+        UserRepository userRepository = new UserDao(getApplicationContext());
 
-        etUsername = findViewById(R.id.etUsername);
-        etPassword = findViewById(R.id.etPassword);
+        userViewModel = new ViewModelProvider(this, new UserViewModelFactory(userRepository)).get(UserViewModel.class);
+        userViewModel.getCurrentUserLiveData().observe(this, user -> updateUi(user));
 
+        initComponents();
+    }
+
+    private void initComponents() {
         Button btnLogin = findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(view -> {
-
-            String username = etUsername.getText().toString();
-            String password = etPassword.getText().toString();
-            authenticateUser(userViewModel.login(username, password));
-        });
+        btnLogin.setOnClickListener(v -> authenticateUser());
 
         Button btnRegisterUser = findViewById(R.id.btnRegisterUser);
-        btnRegisterUser.setOnClickListener(view -> {
-            navigateToUserFormActivity();
-        });
+        btnRegisterUser.setOnClickListener(v -> navigateToUserFormActivity());
     }
 
-    private void authenticateUser(User user){
+    private void authenticateUser(){
+        EditText etUsername = findViewById(R.id.etUsername);
+        EditText etPassword = findViewById(R.id.etPassword);
+
+        String username = etUsername.getText().toString();
+        String password = etPassword.getText().toString();
+        userViewModel.login(username, password);
+    }
+
+    private void updateUi(User user) {
         if(user != null){
-            Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show();
-            navigateToMenuActivity(user);
-        }
-        else{
-            Toast.makeText(this, "Usuário inválido!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Bem vindo " + user.getUsername() + "!", Toast.LENGTH_SHORT).show();
+            navigateToMenuActivity();
         }
     }
 
-    private void navigateToMenuActivity(User user){
+    private void navigateToMenuActivity(){
         Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("userId", user.getUserId());
         startActivity(intent);
     }
 

@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.ddm.playwire.repository.GameRepository;
+import com.ddm.playwire.network.GameRetrofitInitializer;
 
 public class GameViewModel extends AndroidViewModel {
 
@@ -18,7 +19,7 @@ public class GameViewModel extends AndroidViewModel {
     }
 
     public LiveData<String[]> getAllGames() {
-        GameRepository.getGameNames(new GameRepository.GameNamesCallback() {
+        GameRetrofitInitializer.getGameNames(new GameRepository() {
             @Override
             public void onGameNamesLoaded(String[] gameNames) {
                 gameNamesLiveData.setValue(gameNames);

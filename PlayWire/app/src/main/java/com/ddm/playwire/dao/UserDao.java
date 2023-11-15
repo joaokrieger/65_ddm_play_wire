@@ -4,18 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.ddm.playwire.model.User;
+import com.ddm.playwire.repository.UserRepository;
 
-public class UserDao{
+public class UserDao implements UserRepository {
 
     private final SQLiteManager sqlLiteManager;
-
     private static final String TABLE_NAME = "user";
-
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_USERNAME = "username";
     private static final String COLUMN_PASSWORD = "password";
@@ -24,7 +23,8 @@ public class UserDao{
         this.sqlLiteManager = new SQLiteManager(context);
     }
 
-    public User insert(User user) {
+    @Override
+    public User insertUser(@NonNull User user) {
         SQLiteDatabase sqLiteDatabase = sqlLiteManager.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
@@ -38,6 +38,7 @@ public class UserDao{
         return user;
     }
 
+    @Override
     public User loadUserByCredentials(String username, String password){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_USERNAME + " = '"+ username + "' AND " + COLUMN_PASSWORD + " = '" + password + "'";
@@ -55,6 +56,7 @@ public class UserDao{
         return user;
     }
 
+    @Override
     public User loadUserById(int userId){
 
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_ID + " = "+ userId;

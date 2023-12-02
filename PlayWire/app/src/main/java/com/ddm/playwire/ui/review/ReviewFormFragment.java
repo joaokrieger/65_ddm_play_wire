@@ -24,6 +24,7 @@ import com.ddm.playwire.model.Game;
 import com.ddm.playwire.model.User;
 import com.ddm.playwire.repository.ReviewRepository;
 import com.ddm.playwire.repository.UserRepository;
+import com.ddm.playwire.services.NotificationService;
 import com.ddm.playwire.ui.adapter.AutoCompleteGameAdapter;
 import com.ddm.playwire.ui.main.MenuActivity;
 import com.ddm.playwire.viewmodel.game.GameViewModel;
@@ -110,6 +111,7 @@ public class ReviewFormFragment extends Fragment implements AdapterView.OnItemSe
         }
         else{
             reviewViewModel.insertReview(acGameTitle.getText().toString(), etReviewDescription.getText().toString(), feedback, user);
+            NotificationService.getInstance().showNotification("Feedback Recebido!", "Continue jogando e compartilhando suas experiências!", getActivity());
             navigateToFeedFragment();
         }
     }

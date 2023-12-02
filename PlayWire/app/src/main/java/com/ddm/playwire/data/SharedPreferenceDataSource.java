@@ -16,6 +16,8 @@ public class SharedPreferenceDataSource {
         return instance;
     }
 
+    private SharedPreferenceDataSource(){}
+
     public void init(Context context){
         sharedPreferences = context.getSharedPreferences("sessionData", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "182672544019",
+    "project_id": "play-wire-a4a6d",
+    "storage_bucket": "play-wire-a4a6d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:182672544019:android:f1aedd352eeaff086bcae6",
+        "android_client_info": {
+          "package_name": "com.ddm.playwire"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZpF4o3hZ9vKZfoi1JT73Ds5rOt0keS_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

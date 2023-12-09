@@ -1,16 +1,16 @@
-# Play Wire
-## Descrição
-Este repositório contém o código-fonte de um aplicativo Android desenvolvido em Java, dedicado ao cadastro de reviews de jogos. O aplicativo utiliza recursos avançados, como envio de notificações push, consumo de APIs via Retrofit, adota a arquitetura MVVM para uma organização eficiente do código e faz uso do SQLite como banco de dados para armazenar as informações sobre reviews e classificações de jogos.
-- Manutenção de Reviews de Jogos: Os usuários podem cadastrar e visualizar reviews para diferentes jogos, compartilhando suas experiências e avaliações.
-- Manutenção de Comentários de Reviews: Os usuários podem comentar em reviews cadastradas por outros usuários, expondo a sua opinião.
-- Ranking de Jogos: Os jogos são classificados automaticamente com base nas reviews cadastradas.
-- Manutenção de Usuários: Permite o cadastro de usuários, permitindo a interação entre eles.
-## Funcionalidades Principais
-- Envio de Push Notifications: O aplicativo envia notificações push ao cadastrar um review.
-- Consumo de APIs com Retrofit: Utiliza o Retrofit para integrar dados externos, no caso informações sobre jogos.
-- Arquitetura MVVM: Implementa a arquitetura Model-View-ViewModel para uma separação modular e fácil de manter.
-- SQLite como Database: Utiliza o SQLite para armazenar localmente os dados.
-## Configuração do Projeto
-- Clone este repositório:
-  ``git clone https://github.com/joaokrieger/65_ddm_play_wire.git``
-- Abra o projeto no Android Studio e realize o build.
+# PlayWire
+## Description
+This repository contains the source code of an Android application developed in Java, dedicated to registering game reviews. The application uses advanced features, such as sending push notifications, consuming APIs via Retrofit, adopts the MVVM architecture for efficient code organization and uses SQLite as a database to store information about game reviews and ratings.
+- Game Reviews: Users can register and view reviews for different games, sharing their experiences and evaluations.
+- Review Comments: Users can comment on reviews registered by other users, expressing their opinion.
+- Game Ranking: Games are automatically ranked based on registered reviews.
+- User: Allows users to register, allowing interaction between them.
+## Main Features
+- Sending Push Notifications: The application sends push notifications when registering a review.
+- Consumption of APIs with Retrofit: Uses Retrofit to integrate external data, in this case information about games.
+- MVVM Architecture: Implements the Model-View-ViewModel architecture for modular and easy-to-maintain separation.
+- SQLite as Database: Uses SQLite to store data locally.
+## Project Configuration
+- Clone this repository:
+   ``git clone https://github.com/joaokrieger/65_ddm_play_wire.git``
+- Open the project in Android Studio and build it.
